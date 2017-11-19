@@ -126,6 +126,16 @@ SESSION_CONFIGS = [
         'ret_timer': 300,
         'showupfee': 30,
     },
+    {
+        'name': 'survey',
+        'display_name': "Survey",
+        'num_demo_participants': 1,
+        'app_sequence': [
+            'survey',
+        ],
+        'ret_timer': None,
+        'showupfee': 30,
+    },
 ]
 
 # anything you put after the below line will override
