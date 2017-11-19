@@ -117,20 +117,20 @@ class Results(Page):
 
 
 page_sequence = [
-    Rank,
-    RiskAversion,
-    RiskPreference,
-    MathLevel,
-    MajorDeclarationYN,
-    ExpectedStudyTrack,
+    # Rank,
+    # RiskAversion,
+    # RiskPreference,
+    # MathLevel,
+    # MajorDeclarationYN,
+    # ExpectedStudyTrack,
     DeclaredStudyTrack,
-    GPAStudyTrack,
-    ProfitableStudyTrack,
-    MathLevelNYUAD,
-    PassingGradeMath,
-    Wealth,
-    Statements1,
-    Statements2,
-    ResultsWaitPage,
-    Results
+    # GPAStudyTrack,
+    # ProfitableStudyTrack,
+    # MathLevelNYUAD,
+    # PassingGradeMath,
+    # Wealth,
+    # Statements1,
+    # Statements2,
+    # ResultsWaitPage,
+    # Results
 ]
