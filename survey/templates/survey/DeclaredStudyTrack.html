@@ -1,10 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
-</body>
-</html>
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load i18n %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block styles %}
+
+    <style type="text/css">
+        .radio-inline {
+            margin-right: 30px;
+        }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+
+    <h4>
+    What do you think was your rank within your Task 2 group in terms of sums solved correctly?
+        <br>Please choose a number from 1 (meaning you gave the most correct answers in your group) to 4 (meaning you gave the least correct answers in your group).
+    </h4>
+
+<style type="text/css">
+.table .tg-s6z2{text-align:center;vertical-align:top;width:8%;}
+</style>
+<table class="table">
+    <tr>
+        <th> </th><th class="tg-s6z2">1</th><th class="tg-s6z2">2</th><th class="tg-s6z2">3</th><th class="tg-s6z2">4</th>
+    </tr>
+    {% for field in form %}
+    <tr>
+        <td>{{ field.label }}  </td>
+        <td class="tg-s6z2"><input type="radio" name="{{ field.html_name }}" value="1" required></td>
+        <td class="tg-s6z2"><input type="radio" name="{{ field.html_name }}" value="2" required></td>
+        <td class="tg-s6z2"><input type="radio" name="{{ field.html_name }}" value="3" required></td>
+        <td class="tg-s6z2"><input type="radio" name="{{ field.html_name }}" value="4" required></td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+
+{% next_button %}   <br>   <br>   <br>
+
+{% endblock %}
