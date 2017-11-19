@@ -137,26 +137,26 @@ Review of Task Performance and Final Result
 {#    </div>#}
 {##}
 {##}
-{#    <div class="panel panel-success">#}
-{##}
-{#        <div class="panel-heading">#}
-{#            <h3>Final Score and Allowances</h3>#}
-{#            <hr>#}
-{#            <h4>We will now select at random one of the three tasks to pay you as allowance.</h4>#}
-{#            <ul>#}
-{#                <il><h4>Your score in task 1 is: {{ task_1_score }} </h4></il>#}
+    <div class="panel panel-success">
+
+        <div class="panel-heading">
+            <h3>Final Score and Allowances</h3>
+            <hr>
+            <h4>We will now select at random one of the three tasks to pay you as allowance.</h4>
+            <ul>
+                <il><h4>Your score in task 1 is: {{ task_1_score }} </h4></il>
 {#                <il><h4>Your final score for task 2 is: {{ task_2_final_score }}</h4></il>#}
 {#                <il><h4>Your final score for task 3 is: {{ task_3_final_score }}</h4></il>#}
-{#            </ul>#}
-{#            <h4>Points are converted into AED at a rate of 1 point = 2 AED</h4>#}
-{#            <hr>#}
-{#            <h4>The program has randomly selected {{ task_4_payment }}. </h4>#}
-{#            <h4>Your allowance for this task is {{final_task_earnings}} AED. </h4>#}
-{#            <hr>#}
-{#            <h4>We add to your allowance a showup-allowance of {{ showup_Fee }} AED.</h4>#}
-{#            <h4><b><u>Your final allowance is {{ final_earnings }} AED.</b></u></h4>#}
-{#        </div>#}
-{#    </div>#}
+            </ul>
+            <h4>Points are converted into AED at a rate of 1 point = 4 AED</h4>
+            <hr>
+            <h4>The program has randomly selected {{ task_1_payment }}. </h4>
+            <h4>Your allowance for this task is {{final_task_earnings}} AED. </h4>
+            <hr>
+            <h4>We add to your allowance a showup-allowance of {{ showup_Fee }} AED.</h4>
+            <h4><b><u>Your final allowance is {{ final_earnings }} AED.</u></b></h4>
+        </div>
+    </div>
 
 {% next_button %}   <br>   <br>   <br>
 

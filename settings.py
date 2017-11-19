@@ -116,6 +116,16 @@ SESSION_CONFIGS = [
         'ret_timer': 300,
         'showupfee':30,
         },
+    {
+        'name': 'payments',
+        'display_name': "Payment info",
+        'num_demo_participants': 1,
+        'app_sequence': [
+            'payments',
+        ],
+        'ret_timer': 300,
+        'showupfee': 30,
+    },
 ]
 
 # anything you put after the below line will override
