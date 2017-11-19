@@ -12,6 +12,7 @@ Examples are given for the lab and Amazon Mechanical Turk (AMT).
 
 
 class Constants(BaseConstants):
+    showup_Fee = 30
     name_in_url = 'payments'
     players_per_group = None
     num_rounds = 1
@@ -29,5 +30,3 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     pass
-
-
