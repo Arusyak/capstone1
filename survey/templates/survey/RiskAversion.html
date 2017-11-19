@@ -1,0 +1,31 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load i18n %}
+
+{% block title %}
+    Section 2
+{% endblock %}
+
+{% block styles %}
+
+    <style type="text/css">
+        .radio-inline {
+            margin-right: 30px;
+        }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+    <h3>
+    Please pick one of the following. At the end of the experiment this amount will be added to the rest of your payment. If you choose an option with an uncertain payment, the program will randomly choose either the higher or lower payment.
+    </h3>
+
+    {% formfield player.q_riskaversion %}
+
+
+ 
+{% next_button %}
+
+{% endblock %}

@@ -13,13 +13,22 @@ class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
         pass
 
+class Rank(Page):
+    form_model = models.Player
+    form_fields= ['q_rank']
+
+
+class RiskAversion(Page):
+    form_model = models.Player
+    form_fields = ['q_riskaversion']
 
 class Results(Page):
     pass
 
 
 page_sequence = [
-    MyPage,
+    Rank,
+    RiskAversion,
     ResultsWaitPage,
     Results
 ]
