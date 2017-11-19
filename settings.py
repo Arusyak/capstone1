@@ -111,31 +111,11 @@ SESSION_CONFIGS = [
         'display_name': "Real Effort Task - Adding Task",
         'num_demo_participants': 1,
         'app_sequence': [
-           'intro', 'ret1', 'payments',
+           'intro', 'ret1',
         ],
         'ret_timer': 300,
         'showupfee':30,
         },
-    {
-        'name': 'payments',
-        'display_name': "Payment info",
-        'num_demo_participants': 1,
-        'app_sequence': [
-            'payments',
-        ],
-        'ret_timer': 300,
-        'showupfee': 30,
-    },
-    {
-        'name': 'survey',
-        'display_name': "Survey",
-        'num_demo_participants': 1,
-        'app_sequence': [
-            'survey',
-        ],
-        'ret_timer': None,
-        'showupfee': 30,
-    },
 ]
 
 # anything you put after the below line will override
