@@ -24,24 +24,11 @@
 What is the highest level of mathematics you have taken thus far?
     </h4>
 
-<style type="text/css">
-.table .tg-s6z2{text-align:center;vertical-align:top;width:8%;}
-</style>
-<table class="table">
-    <tr>
-        <th> </th><th class="tg-s6z2">Pre-Calculus</th><th class="tg-s6z2">Calculus</th><th class="tg-s6z2">Multivariable Calculus</th><th class="tg-s6z2">Beyond multivariable calculus</th> </tr>
-    {% for field in form %}
-    <tr>
-        <td>{{ field.label }}  </td>
-        <td class="tg-s6z2"><input type="radio" name="{{ field.html_name }}" value="1" required></td>
-        <td class="tg-s6z2"><input type="radio" name="{{ field.html_name }}" value="2" required></td>
-        <td class="tg-s6z2"><input type="radio" name="{{ field.html_name }}" value="3" required></td>
-        <td class="tg-s6z2"><input type="radio" name="{{ field.html_name }}" value="4" required></td>
-    </tr>
-    {% endfor %}
-</table>
+{% formfield player.q_mathlevel %}
 
+<h4>What was your final GPA in secondary school or high school?</h4>
 
+{#    two spaces for input: ... out of ... #}
  
 {% next_button %}   <br>   <br>   <br>
 

@@ -22,13 +22,16 @@ class RiskAversion(Page):
     form_model = models.Player
     form_fields = ['q_riskaversion']
 
+
 class RiskPreference(Page):
     form_model=models.Player
     form_fields = ['q_riskpreference']
 
+
 class MathLevel(Page):
     form_model=models.Player
     form_fields = ['q_mathlevel']
+
 
 class Results(Page):
     pass
@@ -38,6 +41,7 @@ page_sequence = [
     Rank,
     RiskAversion,
     RiskPreference,
+    MathLevel,
     ResultsWaitPage,
     Results
 ]
