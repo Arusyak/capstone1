@@ -1,0 +1,29 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load i18n %}
+
+{% block title %}
+    Section 2
+{% endblock %}
+
+{% block styles %}
+
+    <style type="text/css">
+        .radio-inline {
+            margin-right: 30px;
+        }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+    <h3>Compared to other NYUAD students, do you think your mathematics ability is...  </h3>
+
+    {% formfield player.q_mathlevelnyuad %}
+
+
+ 
+{% next_button %}
+
+{% endblock %}

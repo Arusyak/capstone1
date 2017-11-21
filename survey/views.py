@@ -57,34 +57,29 @@ class DeclaredStudyTrack(Page):
 
 class GPAStudyTrack(Page):
     form_model=models.Player
-
     form_fields = ['q_gpastudytrack']
 
 
 class ProfitableStudyTrack(Page):
     form_model=models.Player
-
     form_fields = ['q_profitablestudytrack']
 
 
-# class MathLevelNYUAD(Page):
-#     form_model=models.Player
-#
-#     form_fields = ['q_mathlevelnyuad']
-#
-#
-# class PassingGradeMath(Page):
-#     form_model=models.Player
-#
-#     form_fields = ['q_passinggrade']
-#
-#
-# class Wealth(Page):
-#     form_model=models.Player
-#
-#     form_fields = ['q_wealth']
-#
-#
+class MathLevelNYUAD(Page):
+    form_model=models.Player
+    form_fields = ['q_mathlevelnyuad']
+
+
+class PassingGradeMath(Page):
+    form_model=models.Player
+    form_fields = ['q_passinggrade']
+
+
+class Wealth(Page):
+    form_model=models.Player
+    form_fields = ['q_wealth']
+
+
 class Statements1(Page):
     form_model = models.Player
 
@@ -121,9 +116,9 @@ page_sequence = [
     DeclaredStudyTrack,
     GPAStudyTrack,
     ProfitableStudyTrack,
-    # MathLevelNYUAD,
-    # PassingGradeMath,
-    # Wealth,
+    MathLevelNYUAD,
+    PassingGradeMath,
+    Wealth,
     Statements1,
     Statements2,
     ResultsWaitPage,

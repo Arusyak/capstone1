@@ -20,7 +20,7 @@
 {% block content %}
 
     <h4>
-        From a scale of 1 to 4 (1 = completely disagree; 4 = completely agree), <br>
+        From a scale of 1 to 4 (1 = fully disagree; 2 = somewhat disagree; 3 = somewhat agree; 4 = fully agree), <br>
         tell us how much you agree with the following statements:
     </h4>
 
@@ -31,11 +31,11 @@
     <div class="table-responsive">
             <table class="table">
                 <tr>
-                    <th> </th>
-                    <th class="tg-s6z2">disagree<br>1</th>
-                    <th class="tg-s6z2">2</th>
-                    <th class="tg-s6z2">3</th>
-                    <th class="tg-s6z2">agree<br>4</th>
+                    <th></th>
+                    <th class="tg-s6z2">Fully disagree<br>1</th>
+                    <th class="tg-s6z2">Somewhat disagree<br>2</th>
+                    <th class="tg-s6z2">Somewhat agree<br>3</th>
+                    <th class="tg-s6z2">Fully agree<br>4</th>
                 </tr>
                 {% for field in form %}
                 <tr>

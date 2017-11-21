@@ -130,6 +130,33 @@ class Player(BasePlayer):
             doc='In which academic division do you think it is more difficult to receive a high GPA?',
             widget=widgets.RadioSelect())
 
+    q_mathlevelnyuad = models.CharField(
+        initial=None,
+        choices=[
+        '...in the top 25%?',
+        '...in the top 25-50%?',
+        '...in the top 50-75%?',
+        '...in the bottom 25%?',
+        ],
+        verbose_name='Compared to other NYUAD students, do you think your mathematics abilitiy is...',
+        doc='Compared to other NYUAD students, do you think your mathematics abilitiy is...',
+        widget=widgets.RadioSelect())
+
+    q_passinggrade = models.CharField(
+        initial=None,
+        choices=['1','2','3','4','5','6','7','8','9','10'],
+        verbose_name='',
+        doc='How difficult is it for you to get a passing grade in mathematics?',
+        widget=widgets.RadioSelect())
+
+    q_wealth = models.CharField(
+        initial=None,
+        choices=[
+        '1','2','3','4','5','6'],
+        verbose_name='',
+        doc="Please rank your family's wealth based on your home country's standards",
+        widget=widgets.RadioSelect())
+
 
 for key in Constants.ChoiceTable:
     Player.add_to_class(key,
@@ -141,6 +168,6 @@ for key in Constants.ChoiceTable:
             [4, ""]
             ],
             verbose_name=Constants.ChoiceTable[key],
-            doc=Constants.ChoiceTable[key] + str("""From a scale of 1 to 4 (1 = fully disagree, 4 = fully agree),
-            please tell us how much you agree with the following statements:.""")
+            doc=Constants.ChoiceTable[key] + str("From a scale of 1 to 4 (1 = fully disagree, 4 = fully agree),\n"
+                                                 "please tell us how much you agree with the following statements:")
             ))
