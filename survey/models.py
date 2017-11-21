@@ -40,3 +40,22 @@ class Player(BasePlayer):
             verbose_name='',
             doc='Please pick one of the following.',
             widget=widgets.RadioSelect())
+
+    q_riskpreference = models.CharField(
+            initial=None,
+            choices=['1','2','3','4','5','6','7','8','9','1'],
+            verbose_name='',
+            doc='Are you generally a person who is fully prepared to take risks or do you try to avoid taking risks?',
+            widget=widgets.RadioSelect())
+
+    q_mathlevel = models.CharField(
+        initial=None,
+        choices=[
+            'Pre-calculus',
+            'Calculus',
+            'Multivariable calculus',
+            'Beyond multivariable calculus'
+        ],
+        verbose_name='',
+        doc='What is the highest mathematics level you have taken thus far?',
+        widget=widgets.RadioSelect())

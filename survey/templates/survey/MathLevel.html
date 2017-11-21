@@ -1,9 +1,10 @@
+
 {% extends "global/Page.html" %}
 {% load staticfiles otree_tags %}
 {% load i18n %}
 
 {% block title %}
-Section 1
+    Section 4
 {% endblock %}
 
 {% block styles %}
@@ -20,9 +21,7 @@ Section 1
 
 
     <h4>
-    What do you think was your rank within your Task 2 group in terms of sums solved correctly?
-        <br>Please choose a number from 1 (meaning you gave the most correct answers in your group) to 4 (meaning you gave the least correct answers in your group).
-    <br>If your answer is right, you will earn additional 10 AED.
+What is the highest level of mathematics you have taken thus far?
     </h4>
 
 <style type="text/css">
@@ -30,8 +29,7 @@ Section 1
 </style>
 <table class="table">
     <tr>
-        <th> </th><th class="tg-s6z2">1</th><th class="tg-s6z2">2</th><th class="tg-s6z2">3</th><th class="tg-s6z2">4</th>
-    </tr>
+        <th> </th><th class="tg-s6z2">Pre-Calculus</th><th class="tg-s6z2">Calculus</th><th class="tg-s6z2">Multivariable Calculus</th><th class="tg-s6z2">Beyond multivariable calculus</th> </tr>
     {% for field in form %}
     <tr>
         <td>{{ field.label }}  </td>
@@ -44,7 +42,7 @@ Section 1
 </table>
 
 
-
+ 
 {% next_button %}   <br>   <br>   <br>
 
 {% endblock %}
