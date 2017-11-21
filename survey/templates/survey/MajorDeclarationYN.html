@@ -1,0 +1,30 @@
+
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load i18n %}
+
+{% block title %}
+    Section 4
+{% endblock %}
+
+{% block styles %}
+
+    <style type="text/css">
+        .radio-inline {
+            margin-right: 30px;
+        }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+
+    <h4>Have you declared your major?
+    </h4>
+
+    {% formfield player.q_majordeclarationYN %}
+ 
+{% next_button %}   <br>   <br>   <br>
+
+{% endblock %}

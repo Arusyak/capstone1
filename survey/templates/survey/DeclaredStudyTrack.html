@@ -1,0 +1,31 @@
+
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load i18n %}
+
+{% block title %}
+Section 6
+{% endblock %}
+
+{% block styles %}
+
+    <style type="text/css">
+        .radio-inline {
+            margin-right: 30px;
+        }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+    <h4>
+    Which academic division does your major fall under?
+    </h4>
+
+    {% formfield player.q_declaredstudytrack %}
+
+
+{% next_button %}   <br>   <br>   <br>
+
+{% endblock %}

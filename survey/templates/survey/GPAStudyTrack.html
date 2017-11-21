@@ -1,0 +1,51 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load i18n %}
+
+{% block title %}
+    Section 9
+{% endblock %}
+
+{% block styles %}
+
+    <style type="text/css">
+        .radio-inline {
+            margin-right: 30px;
+        }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+
+    <h4>
+    In which academic division do you think it is more difficult to receive a high GPA?
+        <br>Please rank these divisions on a scale of 1 to 5  (1 least difficult, 5 most difficult).
+    </h4>
+
+<style type="text/css">
+.table .tg-s6z2{text-align:center;vertical-align:top;width:8%;}
+</style>
+<table class="table">
+    <tr>
+        <th> </th><th class="tg-s6z2">1</th><th class="tg-s6z2">2</th><th class="tg-s6z2">3</th><th class="tg-s6z2">4</th><th class="tg-s6z2">5</th>
+    </tr>
+    {% for field in form.q_profitablestudytrack %}
+    <tr>
+        <td>{{ field.label }}  </td>
+        <td class="tg-s6z2"><input type="radio" name="{{ field.html_name }}" value="1" required></td>
+        <td class="tg-s6z2"><input type="radio" name="{{ field.html_name }}" value="2" required></td>
+        <td class="tg-s6z2"><input type="radio" name="{{ field.html_name }}" value="3" required></td>
+        <td class="tg-s6z2"><input type="radio" name="{{ field.html_name }}" value="4" required></td>
+        <td class="tg-s6z2"><input type="radio" name="{{ field.html_name }}" value="5" required></td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+
+
+{% next_button %}   <br>   <br>   <br>
+
+{% endblock %}
