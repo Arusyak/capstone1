@@ -111,7 +111,7 @@ SESSION_CONFIGS = [
         'display_name': "Real Effort Task - Adding Task",
         'num_demo_participants': 1,
         'app_sequence': [
-           'intro', 'ret1',
+           'intro', 'ret1', 'survey',
         ],
         'ret_timer': 300,
         'showupfee':30,
