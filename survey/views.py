@@ -28,11 +28,9 @@ class RiskPreference(Page):
     form_fields = ['q_riskpreference']
 
 
-
-
 class MathLevel(Page):
     form_model=models.Player
-    form_fields = ['q_mathlevel', 'q_GPA_2ndSchool_HighSchool']
+    form_fields = ['q_mathlevel']
 
 
 class MajorDeclarationYN(Page):
@@ -103,15 +101,9 @@ class Statements2(Page):
         'q_CT_preschoolWork',
     ]
 
-    def before_next_page():
-        pass
-
 
 class Results(Page):
-    def vars_for_template(self):
-        return {
-            "risk aversion result":self.player.riskaversion_score()
-        }
+    pass
 
 
 page_sequence = [
