@@ -32,7 +32,7 @@ class RiskPreference(Page):
 
 class MathLevel(Page):
     form_model=models.Player
-    form_fields = ['q_mathlevel']
+    form_fields = ['q_mathlevel', 'q_GPA_2ndSchool_HighSchool']
 
 
 class MajorDeclarationYN(Page):

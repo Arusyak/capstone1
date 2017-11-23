@@ -3,6 +3,7 @@ from otree.api import (
     Currency as c, currency_range
 )
 import random
+from django.forms import widgets as django_widgets
 
 
 author = 'Your name here'
@@ -91,6 +92,12 @@ class Player(BasePlayer):
             doc='What is the highest mathematics level you have taken thus far?',
             widget=widgets.RadioSelect())
 
+    q_GPA_2ndSchool_HighSchool = models.CharField(
+        verbose_name="What was your final GPA in secondary school or high school?",
+            doc="""...."""
+        )
+
+
     q_majordeclarationYN = models.CharField(
             initial=None,
             choices=[
@@ -101,6 +108,9 @@ class Player(BasePlayer):
             doc='Have you declared your major?',
             widget=widgets.RadioSelect())
 
+
+    # how to input checkboxes. 
+    #https://groups.google.com/forum/#!searchin/otree/checkbox%7Csort:date/otree/CLmiH595UDM/LrItGoXvAAAJ
     q_expectedstudytrack = models.CharField(
             initial=None,
             choices=[
@@ -113,7 +123,9 @@ class Player(BasePlayer):
             verbose_name='',
             doc='What is your expected study track? Which of the academic divisions does your expectad major fall under?'
             'If you are unsure, mark the division you are most interested in. If you plan to double major, tick both.',
-            widget=widgets.RadioSelect())
+            widget=django_widgets.CheckboxInput())
+
+
 
     q_declaredstudytrack = models.CharField(
             initial=None,
@@ -124,9 +136,10 @@ class Player(BasePlayer):
             'Science',
             'Social Science',
             ],
-            verbose_name='',
+            verbose_name='...',
             doc='Which academic division does your major fall under?',
-            widget=widgets.RadioSelect())
+            widget=django_widgets.CheckboxInput()
+            )
 
     q_gpastudytrack = models.CharField(
             initial=None,
@@ -139,7 +152,8 @@ class Player(BasePlayer):
             ],
             verbose_name='',
             doc='In which academic division do you think it is more difficult to receive a high GPA?',
-            widget=widgets.RadioSelect())
+             widget=django_widgets.SelectMultiple()
+             )
 
     q_profitablestudytrack = models.CharField(
             initial=None,
@@ -152,7 +166,8 @@ class Player(BasePlayer):
             ],
             verbose_name='',
             doc='In which academic division do you think it is more difficult to receive a high GPA?',
-            widget=widgets.RadioSelect())
+             widget=django_widgets.SelectMultiple()
+             )
 
     q_mathlevelnyuad = models.CharField(
         initial=None,
