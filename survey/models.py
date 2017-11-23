@@ -2,6 +2,7 @@ from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
     Currency as c, currency_range
 )
+import random
 
 
 author = 'Your name here'
@@ -55,6 +56,24 @@ class Player(BasePlayer):
             verbose_name='',
             doc='Please pick one of the following.',
             widget=widgets.RadioSelect())
+
+
+    def riskaversion_score(self):
+
+        x = random.randint(0,1)
+
+        return {
+            '8 AED for certain': [8,8],
+            '12 AED or 6 AED with a 50% chance':[12,6],
+            '16 AED or 4 AED with a 50% chance':[16,4],
+            '20 AED or 2 AED with a 50% chance':[20,2],
+            '24 AED or 0 AED with a 50% chance':[24,0]
+
+        }[self.q_riskaversion][x]
+
+    # q_riskaversion_score = models.FloatField(
+    #     doc = """the score they got in the risk averaion think""")
+
 
     q_riskpreference = models.CharField(
             initial=None,
@@ -163,6 +182,7 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect())
 
 
+
 for key in Constants.ChoiceTable:
     Player.add_to_class(key,
         models.IntegerField(initial=None,
@@ -176,3 +196,4 @@ for key in Constants.ChoiceTable:
             doc=Constants.ChoiceTable[key] + str("From a scale of 1 to 4 (1 = fully disagree, 4 = fully agree),\n"
                                                  "please tell us how much you agree with the following statements:")
             ))
+
