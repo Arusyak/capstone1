@@ -39,7 +39,12 @@ class Player(BasePlayer):
 
     q_rank = models.CharField(
             initial=None,
-            choices=['1','2','3','4'],
+            choices=[
+                [1, "1..."],
+                [2, "2..."],
+                [3, "3..."],
+                [4, "4..."]
+            ],
             verbose_name='',
             doc='What do you think was your rank within your Task 2 group in terms of sums solved correctly? Please choose a number from 1 (meaning you gave the most correct answers in your group) to 4 (meaning you gave the least correct answers in your group).',
             widget=widgets.RadioSelect())
