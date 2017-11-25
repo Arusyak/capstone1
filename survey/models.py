@@ -29,6 +29,23 @@ class Constants(BaseConstants):
          'q_CT_preschoolWork':'A pre-school child is likely to suffer if his or her mother works',
     } #see for loop below class
 
+    ChoiceTable1 = {
+        'q_gpastudytrack_AH': 'Arts and Humanities',
+        'q_gpastudytrack_EG': 'Engineering',
+        'q_gpastudytrack_MD': 'Multidisciplinary (Arab Crossroads or Interactive Media)',
+        'q_gpastudytrack_SC': 'Science',
+        'q_gpastudytrack_SS': 'Social Science'
+    }
+
+    ChoiceTable2 = {
+        'q_profitablestudytrack_AH': 'Arts and Humanities',
+        'q_profitablestudytrack_EG': 'Engineering',
+        'q_profitablestudytrack_MD': 'Multidisciplinary (Arab Crossroads or Interactive Media)',
+        'q_profitablestudytrack_SC': 'Science',
+        'q_profitablestudytrack_SS': 'Social Science'
+    }
+
+
 class Subsession(BaseSubsession):
     pass
 
@@ -42,10 +59,10 @@ class Player(BasePlayer):
     q_rank = models.CharField(
             initial=None,
             choices=[
-                ['1', "1..."],
-                ['2', "2..."],
-                ['3', "3..."],
-                ['4', "4..."]
+                ['1', "1 (you solved the most questions right)"],
+                ['2', "2"],
+                ['3', "3"],
+                ['4', "4 (you solved the least questions right)"]
             ],
             verbose_name='',
             doc='What do you think was your rank within your Task 2 group in terms of sums solved correctly? Please choose a number from 1 (meaning you gave the most correct answers in your group) to 4 (meaning you gave the least correct answers in your group).',
@@ -53,27 +70,25 @@ class Player(BasePlayer):
 
     q_riskaversion = models.CharField(
             initial=None,
-            choices=['8 AED for certain','12 AED or 6 AED with a 50% chance','16 AED or 4 AED with a 50% chance','20 AED or 2 AED with a 50% chance', '24 AED or 0 AED with a 50% chance'],
+            choices=['8 AED for certain',
+                     '12 AED or 6 AED with a 50% chance',
+                     '16 AED or 4 AED with a 50% chance',
+                     '20 AED or 2 AED with a 50% chance',
+                     '24 AED or 0 AED with a 50% chance'],
             verbose_name='',
             doc='Please pick one of the following.',
             widget=widgets.RadioSelect())
 
-
     def riskaversion_score(self):
-
-        x = random.randint(0,1)
+        x = random.randint(0, 1)
 
         return {
-            '8 AED for certain': [8,8],
-            '12 AED or 6 AED with a 50% chance':[12,6],
-            '16 AED or 4 AED with a 50% chance':[16,4],
-            '20 AED or 2 AED with a 50% chance':[20,2],
-            '24 AED or 0 AED with a 50% chance':[24,0]
-
+            '8 AED for certain': [8, 8],
+            '12 AED or 6 AED with a 50% chance':[12, 6],
+            '16 AED or 4 AED with a 50% chance':[16, 4],
+            '20 AED or 2 AED with a 50% chance':[20, 2],
+            '24 AED or 0 AED with a 50% chance':[24, 0]
         }[self.q_riskaversion][x]
-
-    # q_riskaversion_score = models.FloatField(
-    #     doc = """the score they got in the risk averaion think""")
 
 
     q_riskpreference = models.CharField(
@@ -82,6 +97,11 @@ class Player(BasePlayer):
             verbose_name='',
             doc='Are you generally a person who is fully prepared to take risks or do you try to avoid taking risks?',
             widget=widgets.RadioSelect())
+
+    def vars_for_template(self):
+        return {
+            "risk aversion result": self.q_riskaversion
+        }
 
     q_mathlevel = models.CharField(
             initial=None,
@@ -92,9 +112,16 @@ class Player(BasePlayer):
             doc='What is the highest mathematics level you have taken thus far?',
             widget=widgets.RadioSelect())
 
-    q_GPA_2ndSchool_HighSchool = models.CharField(
-        verbose_name="What was your final GPA in secondary school or high school?",
-            doc="""...."""
+    q_GPA_highschool = models.CharField(
+            verbose_name="What was your final GPA in high school?",
+            doc="""GPA real""",
+            max_length=5
+
+        )
+
+    q_GPA_highschool_max= models.CharField(
+            verbose_name= '',
+            doc="""GPA max"""
         )
 
 
@@ -111,33 +138,87 @@ class Player(BasePlayer):
 
     # how to input checkboxes. 
     #https://groups.google.com/forum/#!searchin/otree/checkbox%7Csort:date/otree/CLmiH595UDM/LrItGoXvAAAJ
-    q_expectedstudytrack = models.CharField(
+    q_expectedstudytrack_AH = models.CharField(
             initial=None,
-            choices=[
-            'Arts and Humanities',
-            'Engineering',
-            'Multidisciplinary Track (Interactive Media, Arab Crossroads',
-            'Science',
-            'Social Science',
-            ],
-            verbose_name='',
-            doc='What is your expected study track? Which of the academic divisions does your expectad major fall under?'
-            'If you are unsure, mark the division you are most interested in. If you plan to double major, tick both.',
+            # choices = [
+            #      0,1
+            # ],
+            verbose_name='Arts and Humanities',
+            doc='Arts and Humanities expected',
+            widget=django_widgets.CheckboxInput()
+    )
+
+    q_expectedstudytrack_EG = models.CharField(
+            initial=None,
+            # choices = [
+            #     0,1],
+            verbose_name='Engineering',
+            doc='Engineering expected',
+            widget=django_widgets.CheckboxInput()
+    )
+
+    q_expectedstudytrack_MD = models.CharField(
+            initial=None,
+            # choices = [
+            #   0, 1],
+            verbose_name='Multidisciplinary (Arab Crossroads or Interactive Media)',
+            doc='Multidisciplinary expected',
+            widget=django_widgets.CheckboxInput()
+    )
+
+    q_expectedstudytrack_SC = models.CharField(
+            initial=None,
+            # choices=[
+            #     0, 1],
+            verbose_name='Science',
+            doc='Science expected',
+            widget=django_widgets.CheckboxInput()
+    )
+
+
+    q_expectedstudytrack_SS = models.CharField(
+            initial=None,
+            # choices=[
+            #     0, 1],
+            verbose_name='Social Science',
+            doc='Social Science expected',
+            widget=django_widgets.CheckboxInput()
+    )
+
+
+    q_declaredstudytrack_AH = models.CharField(
+            initial=None,
+            verbose_name='Arts and Humanities',
+            doc='Arts and Humanities declared',
             widget=django_widgets.CheckboxInput())
 
-    q_declaredstudytrack = models.CharField(
+    q_declaredstudytrack_EG = models.CharField(
             initial=None,
-            choices=[
-            'Arts and Humanities',
-            'Engineering',
-            'Multidisciplinary Track (Interactive Media, Arab Crossroads',
-            'Science',
-            'Social Science',
-            ],
-            verbose_name='...',
-            doc='Which academic division does your major fall under?',
+            verbose_name='Engineering',
+            doc='Engineering declared',
             widget=django_widgets.CheckboxInput()
-            )
+    )
+
+    q_declaredstudytrack_MD = models.CharField(
+            initial=None,
+            verbose_name='Multidisciplinary (Arab Crossroads or Interactive Media)',
+            doc='Multidisciplinary declared',
+            widget=django_widgets.CheckboxInput()
+    )
+
+    q_declaredstudytrack_SC = models.CharField(
+            initial=None,
+            verbose_name='Science',
+            doc='Science declared',
+            widget=django_widgets.CheckboxInput()
+    )
+
+    q_declaredstudytrack_SS = models.CharField(
+            initial=None,
+            verbose_name='Social Science',
+            doc='Social Science declared',
+            widget=django_widgets.CheckboxInput()
+    )
 
     q_gpastudytrack = models.CharField(
             initial=None,
@@ -146,7 +227,7 @@ class Player(BasePlayer):
             'Engineering',
             'Multidisciplinary Track (Interactive Media, Arab Crossroads',
             'Science',
-            'Social Science',
+            'Social Science'
             ],
             verbose_name='',
             doc='In which academic division do you think it is more difficult to receive a high GPA?',
@@ -160,7 +241,7 @@ class Player(BasePlayer):
             'Engineering',
             'Multidisciplinary Track (Interactive Media, Arab Crossroads',
             'Science',
-            'Social Science',
+            'Social Science'
             ],
             verbose_name='',
             doc='In which academic division do you think it is more difficult to receive a high GPA?',
@@ -173,7 +254,7 @@ class Player(BasePlayer):
         '...in the top 25%?',
         '...in the top 25-50%?',
         '...in the top 50-75%?',
-        '...in the bottom 25%?',
+        '...in the bottom 25%?'
         ],
         verbose_name='Compared to other NYUAD students, do you think your mathematics abilitiy is...',
         doc='Compared to other NYUAD students, do you think your mathematics abilitiy is...',
@@ -209,3 +290,31 @@ for key in Constants.ChoiceTable:
             doc=Constants.ChoiceTable[key] + str("From a scale of 1 to 4 (1 = fully disagree, 4 = fully agree),\n"
                                                  "please tell us how much you agree with the following statements:")))
 
+
+for key in Constants.ChoiceTable1:
+    Player.add_to_class(key,
+        models.IntegerField(initial=None,
+        choices=[
+        [1,""],
+        [2,""],
+        [3,""],
+        [4,""],
+        [5,""],
+        ],
+        verbose_name = Constants.ChoiceTable1[key],
+        doc = Constants.ChoiceTable1[key] + str("""Rank these divisions in terms of how difficult it is to get a high GPA.""")
+        ))
+
+for key in Constants.ChoiceTable2:
+    Player.add_to_class(key,
+        models.IntegerField(initial=None,
+        choices=[
+        [1,""],
+        [2,""],
+        [3,""],
+        [4,""],
+        [5,""],
+        ],
+        verbose_name = Constants.ChoiceTable2[key],
+        doc = Constants.ChoiceTable2[key] + str("""Rank these divisions in terms of how much money you expect a student would earn in 10 years.""")
+        ))

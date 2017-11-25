@@ -27,11 +27,8 @@ What is the highest level of mathematics you have taken thus far?
 {% formfield player.q_mathlevel %}
 
 
-{% formfield player.q_GPA_2ndSchool_HighSchool %}
-<p>Helper text.... for example, like, 36 out of 40</=p>
+{% formfield player.q_GPA_highschool %} out of <br> <br> {% formfield player.q_GPA_highschool_max %}
 
-
-{#    two spaces for input: ... out of ... #}
  
 {% next_button %}   <br>   <br>   <br>
 
