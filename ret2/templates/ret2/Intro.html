@@ -1,0 +1,90 @@
+
+{% extends "global/BaseMotherhood.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Task 2 Instructions
+{% endblock %}
+
+{% block content %}
+
+{% load otree_tags staticfiles %}
+
+
+
+<div class="instructions well well-lg">
+  
+
+
+    <p><br>
+      In this task, as in Task 1, you will have 3 minutes to calculate the correct sum of a series of two two-digit numbers.
+      Your final score will depend on your performance relative to that of a group of <b>other female students at Zayed University</b> participating in this experiment under similar circumstances. Each group consists of four people. 
+      The three other members of your group will be randomly selected.  
+      You will never know the names of the other people in your group and they will never know your name or actions. 
+    </p>
+    <p>
+       There are two possible outcomes if Task 2 is randomly selected to determine your allowance.
+       If you are the individual who correctly solves the largest number of additions in your group, you will receive <b>4 points for each correct addition</b>. 
+       If you are not this individual, you will receive zero points for this task. 
+    </p>
+    <p>
+       For example, if you correctly completed 10 additions, and the three other members of your group completed 7, 8, and 9, then you will earn 40 points (4 * 10) if Task 2 is selected at the end of the experiment. That is, 80 AED.
+       
+      In the event that more than one individual perform the same number of correct additions, and they are tied for the first place, a single player will be randomly chosen as the winner. 
+   </p>
+       
+    <p>
+    <b>For each point, your allowance will increase by 2 AED. Remember that you will have the option to donate part of your allowance to charity.</b>
+
+    You will not be informed about whether or not you won or lost in this task until later in the experiment. <br>
+    </p>
+    <p>
+    Please raise your hand and alert an experimenter if you have any questions.<br>
+    </p>
+
+
+	
+
+</div>
+
+    {% if debug %}
+
+      In debug mode only, 
+      {% next_button %}<br><br><br>
+    {% endif %}
+
+<!-- Countdown timer -->
+<script>
+function countdown( elementName, minutes, seconds )
+{
+    var element, endTime, hours, mins, msLeft, time;
+
+    function twoDigits( n )
+    {
+        return (n <= 9 ? "0" + n : n);
+    }
+
+    function updateTimer()
+    {
+        msLeft = endTime - (+new Date);
+        if ( msLeft < 1000 ) {
+            element.innerHTML = "0";
+        } else {
+            time = new Date( msLeft );
+            hours = time.getUTCHours();
+            mins = time.getUTCMinutes();
+            element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
+            setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
+        }
+    }
+
+    element = document.getElementById( elementName );
+    endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
+    updateTimer();
+}
+
+countdown( "countdown", 0, 120 );
+countdown( "countdown2", 100, 0 );
+ </script>
+
+{% endblock %}
