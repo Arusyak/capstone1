@@ -81,6 +81,8 @@ class GPAStudyTrack(Page):
     def error_message(self, values):
         if values['q_gpastudytrack_AH'] + values['q_gpastudytrack_EG']+values['q_gpastudytrack_MD'] + values['q_gpastudytrack_SC']+ values['q_gpastudytrack_SS'] !=15:
             return 'Please select each rank only once'
+        if values['q_profitablestudytrack_AH'] == values['q_profitablestudytrack_EG'] == values['q_profitablestudytrack_MD'] == values['q_profitablestudytrack_SC'] == values['q_profitablestudytrack_SS']:
+            return 'Please select each rank only once'
 
 
 
@@ -94,6 +96,8 @@ class ProfitableStudyTrack(Page):
 
     def error_message(self, values):
         if values['q_profitablestudytrack_AH'] + values['q_profitablestudytrack_EG']+values['q_profitablestudytrack_MD'] + values['q_profitablestudytrack_SC']+ values['q_profitablestudytrack_SS'] !=15:
+            return 'Please select each rank only once'
+        if values['q_profitablestudytrack_AH'] == values['q_profitablestudytrack_EG'] == values['q_profitablestudytrack_MD'] == values['q_profitablestudytrack_SC'] == values['q_profitablestudytrack_SS']:
             return 'Please select each rank only once'
 
 class MathLevelNYUAD(Page):
