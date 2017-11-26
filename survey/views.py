@@ -69,6 +69,11 @@ class DeclaredStudyTrack(Page):
     def is_displayed(self):
         return self.player.q_majordeclarationYN == "Yes"
 
+    def error_message(self, values):
+        if (values['q_declaredstudytrack_AH'] + values['q_declaredstudytrack_EG']+values['q_declaredstudytrack_MD'] + values['q_declaredstudytrack_SC']+ values['q_declaredstudytrack_SS']) > 2:
+            return 'You may not check more than two academic divisions.'
+
+
 
 class GPAStudyTrack(Page):
     form_model=models.Player

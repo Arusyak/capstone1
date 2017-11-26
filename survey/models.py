@@ -187,34 +187,34 @@ class Player(BasePlayer):
     )
 
 
-    q_declaredstudytrack_AH = models.CharField(
+    q_declaredstudytrack_AH = models.BooleanField(
             initial=None,
             verbose_name='Arts and Humanities',
             doc='Arts and Humanities declared',
             widget=django_widgets.CheckboxInput())
 
-    q_declaredstudytrack_EG = models.CharField(
+    q_declaredstudytrack_EG = models.BooleanField(
             initial=None,
             verbose_name='Engineering',
             doc='Engineering declared',
             widget=django_widgets.CheckboxInput()
     )
 
-    q_declaredstudytrack_MD = models.CharField(
+    q_declaredstudytrack_MD = models.BooleanField(
             initial=None,
             verbose_name='Multidisciplinary (Arab Crossroads or Interactive Media)',
             doc='Multidisciplinary declared',
             widget=django_widgets.CheckboxInput()
     )
 
-    q_declaredstudytrack_SC = models.CharField(
+    q_declaredstudytrack_SC = models.BooleanField(
             initial=None,
             verbose_name='Science',
             doc='Science declared',
             widget=django_widgets.CheckboxInput()
     )
 
-    q_declaredstudytrack_SS = models.CharField(
+    q_declaredstudytrack_SS = models.BooleanField(
             initial=None,
             verbose_name='Social Science',
             doc='Social Science declared',
