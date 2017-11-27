@@ -119,6 +119,7 @@ class Results(Page):
 
 page_sequence = [
     Intro,
+    WaitPage,
     SumTask,
     ResultsWaitPage,
     Results

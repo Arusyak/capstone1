@@ -18,7 +18,7 @@
 
     <p><br>
       In this task, as in Task 1, you will have 3 minutes to calculate the correct sum of a series of two two-digit numbers.
-      Your final score will depend on your performance relative to that of a group of <b>other female students at Zayed University</b> participating in this experiment under similar circumstances. Each group consists of four people. 
+      Your final score will depend on your performance relative to that of a group of <b>other participants</b> in this experiment under similar circumstances. Each group consists of four people.
       The three other members of your group will be randomly selected.  
       You will never know the names of the other people in your group and they will never know your name or actions.
     </p>
@@ -47,17 +47,14 @@
     <p>
     Please raise your hand and alert an experimenter if you have any questions.<br>
     </p>
-        <p>
-           Otherwise, if you are ready, please click "Next" below to start the time and this {{ player.task_timer}} second task.<br>
-    </p>
-
 	
 
 </div>
 
 
-      {% next_button %}<br><br><br>
-
+    {% if debug %}
+        {% next_button %}<br><br><br>
+    {% endif %}
 
 
 {% endblock %}

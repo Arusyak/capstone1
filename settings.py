@@ -107,6 +107,16 @@ SESSION_CONFIG_DEFAULTS = {
 
 SESSION_CONFIGS = [
     {
+        'name': 'experiment',
+        'display_name': "The whole experiment",
+        'num_demo_participants': 4,
+        'app_sequence': [
+            'intro', 'ret1', 'ret2'
+        ],
+        'ret_timer': 300,
+        'showupfee': 30,
+    },
+    {
         'name': 'ret1',
         'display_name': "Real Effort Task - Adding Task",
         'num_demo_participants': 1,
