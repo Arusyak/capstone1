@@ -137,6 +137,16 @@ SESSION_CONFIGS = [
         'showupfee': 30,
     },
     {
+        'name': 'ret3',
+        'display_name': "Real Effort Task 3 - Adding Task",
+        'num_demo_participants': 4,
+        'app_sequence': [
+            'ret2', 'ret3',
+        ],
+        'ret_timer': 60,
+        'showupfee': 30,
+    },
+    {
         'name': 'survey',
         'display_name': "Survey",
         'num_demo_participants': 1,

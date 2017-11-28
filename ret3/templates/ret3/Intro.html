@@ -1,0 +1,62 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Instructions - Task 3
+{% endblock %}
+
+{% block content %}
+
+{% load otree_tags staticfiles %}
+
+<div class="instructions well well-lg">
+
+    <h2 class="panel-sub-heading">
+        
+    </h2>
+
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'global/matrix.css' %}"/>
+
+
+    <p><br>
+      As in the previous tasks you will be given 3 minutes to calculate the correct sum of a series of two 2-digit numbers.
+      </p>
+      <p>
+      Before we begin with the task, you will have to choose 
+      whether your allowance depends on your <b>individual performance</b> (as in Task 1) or your <b>compared performance</b> (as in Task 2).
+    </p>
+
+    <p>
+      If Task 3 is randomly selected to determine your allowance, then:
+
+      <ul>
+        <li>If you choose <i><b>individual performance</b></i> you will receive 1 point per problem you solve correctly (as in Task 1).</li>
+        <li>If you choose the <i><b>compared performance</b></i> your performance will be compared to that of the other three participants in  your group in Task 2.
+        If you are the individual who correctly solves the largest number of additions, you will receive 4 points for each correct addition. 
+       If you are not this individual, you will receive zero points in this task. </li>
+      </ul>
+     </p>
+     <br>
+     <p>
+      {% for field in form %}
+        {% formfield field %}
+      {% endfor %}
+     </p><br>
+
+      <p>
+        <b>For each point, your allowance will increase by 5 AED.</b>
+      </p>
+
+    <p>
+       When you are ready to start, click the next button. <br><br>
+      </p>
+
+
+
+</div>
+
+      {% next_button %}<br><br><br>
+
+
+{% endblock %}
