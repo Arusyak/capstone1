@@ -65,7 +65,9 @@ class SumTask(Page):
         }
 
     def before_next_page(self):
-        self.player.score_round()
+        self.group.score_round()
+
+
 
 
 class ResultsWaitPage(WaitPage):
@@ -73,8 +75,7 @@ class ResultsWaitPage(WaitPage):
         return self.round_number == Constants.num_rounds
 
     def after_all_players_arrive(self):
-        pass
-
+        self.group.score_round()
 
 class Results(Page):
     def is_displayed(self):
@@ -82,12 +83,7 @@ class Results(Page):
 
     def vars_for_template(self):
 
-        total_payoff = 0
-        for p in self.player.in_all_rounds():
-            if p.payoff_score != None:
-                total_payoff += p.payoff_score
 
-        self.participant.vars['task_2_score'] = total_payoff
 
         # get other player's scores
         op_scores = []

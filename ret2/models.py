@@ -128,18 +128,28 @@ class Subsession(BaseSubsession):
             p.solution = p.int1 + p.int2 + p.int3 + p.int4 + p.int5
 
 class Group(BaseGroup):
-    pass
-
-class Player(BasePlayer):
 
     def score_round(self):
         # update player payoffs
-        if (self.solution == self.user_total):
-            self.is_correct = True
-            self.payoff_score = 1
-        else:
-            self.is_correct = False
-            self.payoff_score = c(0)
+        for PLAYER in self.get_players():
+            if (PLAYER.solution == PLAYER.user_total):
+                PLAYER.is_correct = True
+                PLAYER.payoff_score = 1
+            else:
+                PLAYER.is_correct = False
+                PLAYER.payoff_score = c(0)
+
+
+        for PLAYER in self.get_players():
+            total_payoff = 0
+            for p in PLAYER.in_all_rounds():
+                if p.payoff_score != None:
+                    total_payoff += p.payoff_score
+
+            PLAYER.participant.vars['task_2_score'] = total_payoff
+
+class Player(BasePlayer):
+
 
 
 

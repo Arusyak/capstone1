@@ -31,7 +31,7 @@ Real Effort Task. Add as many ints as possible.
 class Constants(BaseConstants):
     name_in_url = 'task_sum'
     players_per_group = 4
-    task_timer = 300 #see Subsession, before_session_starts setting.
+    task_timer = 60 #see Subsession, before_session_starts setting.
     num_rounds = 100 # must be more than the max one person can do in task_timer seconds
 
     INTS_T1 = [
@@ -133,7 +133,9 @@ class Constants(BaseConstants):
         [40, 46, 32, 10, 97],
         [58, 75, 56, 37, 83],
         [31, 47, 68, 89, 54],
-        [14, 83, 26, 94, 69],
+        [14, 83, 26, 42, 77],
+        [58, 83, 26, 94, 33],
+        [14, 83, 12, 94, 22],
     ]
 
 
