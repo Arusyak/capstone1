@@ -13,9 +13,10 @@ class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
         pass
 
+
 class Rank(Page):
     form_model = models.Player
-    form_fields= ['q_rank']
+    form_fields = ['q_rank']
 
 
 class RiskAversion(Page):
@@ -24,33 +25,34 @@ class RiskAversion(Page):
 
 
 class RiskPreference(Page):
-    form_model=models.Player
+    form_model = models.Player
     form_fields = ['q_riskpreference']
 
     def vars_for_template(self):
         return {
-            "risk aversion result":self.player.riskaversion_score()
+            "risk aversion result": self.player.riskaversion_score()
         }
 
 
 class MathLevel(Page):
-    form_model=models.Player
+    form_model = models.Player
     form_fields = ['q_mathlevel', 'q_GPA_highschool', 'q_GPA_highschool_max']
 
 
 class MajorDeclarationYN(Page):
-    form_model=models.Player
+    form_model = models.Player
 
     form_fields = ['q_majordeclarationYN']
 
 
 class ExpectedStudyTrack(Page):
-    form_model=models.Player
+    form_model = models.Player
     form_fields = ['q_expectedstudytrack_AH',
                    'q_expectedstudytrack_EG',
                    'q_expectedstudytrack_MD',
                    'q_expectedstudytrack_SC',
                    'q_expectedstudytrack_SS']
+
     def is_displayed(self):
         return self.player.q_majordeclarationYN == "No"
 
@@ -60,23 +62,25 @@ class ExpectedStudyTrack(Page):
 
 
 class DeclaredStudyTrack(Page):
-    form_model=models.Player
+    form_model = models.Player
     form_fields = ['q_declaredstudytrack_AH',
                    'q_declaredstudytrack_EG',
                    'q_declaredstudytrack_MD',
                    'q_declaredstudytrack_SC',
                    'q_declaredstudytrack_SS']
+
     def is_displayed(self):
         return self.player.q_majordeclarationYN == "Yes"
 
     def error_message(self, values):
-        if (values['q_declaredstudytrack_AH'] + values['q_declaredstudytrack_EG']+values['q_declaredstudytrack_MD'] + values['q_declaredstudytrack_SC']+ values['q_declaredstudytrack_SS']) > 2:
+        if values['q_declaredstudytrack_AH'] + values['q_declaredstudytrack_EG']+values['q_declaredstudytrack_MD']\
+                + values['q_declaredstudytrack_SC']+ values['q_declaredstudytrack_SS'] >> 2:
             return 'You may not check more than two academic divisions.'
 
 
 
 class GPAStudyTrack(Page):
-    form_model=models.Player
+    form_model = models.Player
     form_fields = ['q_gpastudytrack_AH',
                    'q_gpastudytrack_EG',
                    'q_gpastudytrack_MD',
@@ -84,11 +88,15 @@ class GPAStudyTrack(Page):
                    'q_gpastudytrack_SS']
 
     def error_message(self, values):
-        if values['q_gpastudytrack_AH'] + values['q_gpastudytrack_EG']+values['q_gpastudytrack_MD'] + values['q_gpastudytrack_SC']+ values['q_gpastudytrack_SS'] !=15:
+        if values['q_gpastudytrack_AH'] + values['q_gpastudytrack_EG']+values['q_gpastudytrack_MD']\
+                + values['q_gpastudytrack_SC']+ values['q_gpastudytrack_SS'] !=15:
             return 'Please select each rank only once'
-        if values['q_profitablestudytrack_AH'] == values['q_profitablestudytrack_EG'] == values['q_profitablestudytrack_MD'] == values['q_profitablestudytrack_SC'] == values['q_profitablestudytrack_SS']:
+        if values['q_gpastudytrack_AH'] == values['q_gpastudytrack_EG'] == values['q_gpastudytrack_MD']\
+                == values['q_gpastudytrack_SC'] == values['q_gpastudytrack_SS']==3:
             return 'Please select each rank only once'
-
+        # if values['q_gpastudytrack_AH'] == values['q_gpastudytrack_EG'] or values['q_gpastudytrack_MD']\
+        #         =! values['q_gpastudytrack_SC'] =! values['q_gpastudytrack_SS']:
+        #     return 'Please select each rank only once'
 
 
 class ProfitableStudyTrack(Page):
@@ -100,7 +108,7 @@ class ProfitableStudyTrack(Page):
                    'q_profitablestudytrack_SS']
 
     def error_message(self, values):
-        if values['q_profitablestudytrack_AH'] + values['q_profitablestudytrack_EG']+values['q_profitablestudytrack_MD'] + values['q_profitablestudytrack_SC']+ values['q_profitablestudytrack_SS'] !=15:
+        if values['q_profitablestudytrack_AH'] + values['q_profitablestudytrack_EG']+values['q_profitablestudytrack_MD']+values['q_profitablestudytrack_SC']+values['q_profitablestudytrack_SS'] !=15:
             return 'Please select each rank only once'
         if values['q_profitablestudytrack_AH'] == values['q_profitablestudytrack_EG'] == values['q_profitablestudytrack_MD'] == values['q_profitablestudytrack_SC'] == values['q_profitablestudytrack_SS']:
             return 'Please select each rank only once'

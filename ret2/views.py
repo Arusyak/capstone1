@@ -32,8 +32,6 @@ class SumTask(Page):
     form_model = models.Player
     form_fields = ['user_total']
 
-    # timeout_seconds = self.player.ret_timer # time? no, only works on specific pages
-
     def get_timeout_seconds(self):
         return self.participant.vars['expiry_timestamp'] - time.time()
 
@@ -68,8 +66,6 @@ class SumTask(Page):
         self.group.score_round()
 
 
-
-
 class ResultsWaitPage(WaitPage):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
@@ -82,8 +78,6 @@ class Results(Page):
         return self.round_number == Constants.num_rounds
 
     def vars_for_template(self):
-
-
 
         # get other player's scores
         op_scores = []

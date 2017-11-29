@@ -2,7 +2,6 @@
 # <standard imports>
 from __future__ import division
 
-import otree.models
 from otree.db import models
 from otree import widgets
 from otree.common import Currency as c, currency_range, safe_json
@@ -143,7 +142,7 @@ class Subsession(BaseSubsession):
 
     def before_session_starts(self):
 
-        players = self.get_players()
+        # players = self.get_players()
         if 'task_timer' in self.session.config:
             task_timer = self.session.config['task_timer']
         else:
@@ -158,21 +157,29 @@ class Subsession(BaseSubsession):
             p.int5 = Constants.INTS_T3[self.round_number-1][4]
             p.solution = p.int1 + p.int2 + p.int3 + p.int4 + p.int5
 
-class Group(BaseGroup):
-    pass
 
-class Player(BasePlayer):
+class Group(BaseGroup):
 
     def score_round(self):
         # update player payoffs
-        if (self.solution == self.user_total):
-            self.is_correct = True
-            self.payoff_score = 1
-        else:
-            self.is_correct = False
-            self.payoff_score = c(0)
+        for PLAYER in self.get_players():
+            if PLAYER.solution == PLAYER.user_total:
+                PLAYER.is_correct = True
+                PLAYER.payoff_score = 1
+            else:
+                PLAYER.is_correct = False
+                PLAYER.payoff_score = c(0)
+
+        for PLAYER in self.get_players():
+            total_payoff = 0
+            for p in PLAYER.in_all_rounds():
+                if p.payoff_score is not None:
+                    total_payoff += p.payoff_score
+
+            PLAYER.participant.vars['task_3_score'] = total_payoff
 
 
+class Player(BasePlayer):
 
     task_timer = models.PositiveIntegerField(
         doc="""The length of the real effort task timer."""
@@ -197,10 +204,10 @@ class Player(BasePlayer):
         doc="this round's correct summation")
 
     user_total = models.PositiveIntegerField(
-        min = 1,
-        max = 9999,
+        min=1,
+        max=9999,
         doc="user's summation",
-        widget=widgets.TextInput(attrs={'autocomplete':'off'}))
+        widget=widgets.TextInput(attrs={'autocomplete': 'off'}))
 
     is_correct = models.BooleanField(
         doc="did the user get the task correct?")
@@ -215,4 +222,5 @@ class Player(BasePlayer):
         # if this is chg'd, you must alter code throughout later experiment!!!
         doc="user's payment method selection",
         verbose_name='Select your choice of scoring method',
-        widget=widgets.RadioSelect())
+        widget=widgets.RadioSelect()
+    )

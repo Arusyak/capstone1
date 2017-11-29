@@ -32,7 +32,7 @@ class Constants(BaseConstants):
     name_in_url = 'task_sum'
     players_per_group = 4
     task_timer = 60 #see Subsession, before_session_starts setting.
-    num_rounds = 100 # must be more than the max one person can do in task_timer seconds
+    num_rounds = 70 # must be more than the max one person can do in task_timer seconds
 
     INTS_T1 = [
         [51, 47, 11, 38, 74],

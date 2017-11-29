@@ -14,19 +14,14 @@ from otree.api import (
     Currency as c, currency_range
 )
 import random
-
-
-
-
 # </standard imports>
-
-
 
 author = 'Curtis Kephart (economicurtis@gmail.com)'
 
 doc = """
 Real Effort Task. Add as many ints as possible.  
 """
+
 
 class Constants(BaseConstants):
     name_in_url = 'task_sum2'
