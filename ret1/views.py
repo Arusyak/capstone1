@@ -106,6 +106,7 @@ class Results(Page):
         return {
             'table_rows': table_rows,
             'total_payoff': round(total_payoff),
+            'task_1_score':self.participant.vars['task_1_score']
         }
 
         # def before_next_page(self):
