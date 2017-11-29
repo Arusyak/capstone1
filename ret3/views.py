@@ -196,5 +196,5 @@ class Results(Page):
         }
 
 
-page_sequence = [Intro, Wait, SumTask, ResultsWaitPage, Results]
+page_sequence = [Intro, SumTask, ResultsWaitPage, Results]
 
