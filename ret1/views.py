@@ -25,8 +25,6 @@ class task(Page):
     form_model = models.Player
     form_fields = ['user_total']
 
-    # timeout_seconds = self.player.ret_timer # time? no, only works on specific pages
-
     def get_timeout_seconds(self):
         return self.participant.vars['expiry_timestamp'] - time.time()
 
@@ -89,11 +87,11 @@ class Results(Page):
                 if (prev_player.user_total > 0):
                     row = {
                         'round_number': prev_player.round_number,
-                        'int1': prev_player.int1,
-                        'int2': prev_player.int2,
-                        'int3': prev_player.int3,
-                        'int4': prev_player.int4,
-                        'int5': prev_player.int5,
+                        # 'int1': prev_player.int1,
+                        # 'int2': prev_player.int2,
+                        # 'int3': prev_player.int3,
+                        # 'int4': prev_player.int4,
+                        # 'int5': prev_player.int5,
                         'Ints_sum': prev_player.solution,
                         'player_sum': round(prev_player.user_total),
                         'is_correct': prev_player.is_correct,
