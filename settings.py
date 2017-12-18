@@ -123,7 +123,7 @@ SESSION_CONFIGS = [
         'app_sequence': [
            'intro', 'ret1',
         ],
-        'ret_timer': 300,
+        'task_timer': 300,
         'showupfee':30,
         },
     {

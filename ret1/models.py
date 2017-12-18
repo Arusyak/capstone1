@@ -567,6 +567,7 @@ class Player(BasePlayer):
         doc="""The length of the real effort task timer."""
     )
 
+
     int1 = models.PositiveIntegerField(
         doc="this round's first int")
 

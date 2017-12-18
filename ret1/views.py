@@ -33,6 +33,20 @@ class task(Page):
 
     def vars_for_template(self):
 
+        def html_table_64(arr):
+          cnt = 0
+          result = ""
+          result = result + '<table align="center" class="mat">'
+          for row in range(8):
+            result = result + '  <tr>'
+            for cell in range(8):
+              result = result + '    <td>' + str(arr[cnt]) +'</td>'
+              cnt = cnt + 1
+            result = result + '</tr>'
+          result = result + '</table>'
+
+          return(result)
+
         # current number of correctly done tasks
         total_payoff = 0
         for p in self.player.in_all_rounds():
@@ -53,6 +67,8 @@ class task(Page):
             'round_count': (self.round_number - 1),
             'debug': settings.DEBUG,
             'correct_last_round': correct_last_round,
+            'matrix_array':Constants.INTS_T2[self.round_number-1],
+            'matrix':html_table_64(Constants.INTS_T2[self.round_number-1]),
         }
 
     def before_next_page(self):

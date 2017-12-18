@@ -10,6 +10,33 @@
 {% block content %}
 
 <style type="text/css">
+
+
+.mat {
+  width: 30%;
+  border-collapse:collapse;
+    border:1px solid #BEBEBE;
+}
+.mat td{
+  width: 2%;
+  position: relative;
+  border:1px solid #BEBEBE;
+  text-align:center;
+}
+.mat td:after {
+  content: '';
+  display: block;
+  margin-top: 10%;
+}
+.mat td .content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: gold;
+}
+
 .tg  {border-collapse:collapse;border-spacing:0;border:none;margin:0px auto;}
 .tg td{font-family:Arial, sans-serif;font-size:14px;padding:5px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}
 .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:5px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}
@@ -25,6 +52,9 @@
       <th class="tg-s6z2" colspan="4"><h2>Please sum the following numbers into the field below <br>and then click <b>Next</b> or press the <b>Enter</b> key.</h2>
         <br><br>
     </th>
+
+    {{ matrix  | safe }}
+
   </tr>
 {#  <tr>#}
 {#    <td class="tg-s6z3" width="40%" style="padding-bottom:10px">#}
