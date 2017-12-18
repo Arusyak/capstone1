@@ -7,26 +7,19 @@
     Section 6
 {% endblock %}
 
-{% block styles %}
-
-    <style type="text/css">
-        .radio-inline {
-            margin-right: 30px;
-        }
-    </style>
-
-{% endblock %}
 
 {% block content %}
 
 
-    <h4>What is your expected study track? Which of the academic divisions does your expectad major fall under? If you are unsure, mark the division you are most interested in. If you plan to double major, tick both.</h4>
+    <h4>
+    Which academic division does your expected major fall under? If you plan to double major, please tick both majors.
+    </h4>
 
-    {% formfield player.q_expectedstudytrack_AH %}
-    {% formfield player.q_expectedstudytrack_EG %}
-    {% formfield player.q_expectedstudytrack_MD %}
-    {% formfield player.q_expectedstudytrack_SC %}
-    {% formfield player.q_expectedstudytrack_SS %}
+    <p><strong><input id="id_q_declaredstudytrack_AH" maxlength="10000" name="q_declaredstudytrack_AH" type="checkbox"> Arts and Humanities</strong></p>
+    <p><strong><input id="id_q_declaredstudytrack_EG" maxlength="10000" name="q_declaredstudytrack_EG " type="checkbox"> Engineering</strong></p>
+    <p><strong><input id="id_q_declaredstudytrack_MD" maxlength="10000" name="q_declaredstudytrack_MD" type="checkbox"> Multidisciplinary (Arab Crossroads or Interactive Media)</strong></p>
+    <p><strong><input id="id_q_declaredstudytrack_SC" maxlength="10000" name="q_declaredstudytrack_SC" type="checkbox"> Science</strong></p>
+    <p><strong><input id="id_q_declaredstudytrack_SS" maxlength="10000" name="q_declaredstudytrack_SS" type="checkbox"> Social Science</strong></p>
 
  
 {% next_button %}   <br>   <br>   <br>

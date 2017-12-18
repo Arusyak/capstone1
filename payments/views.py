@@ -160,7 +160,7 @@ class HoldOn(Page):
             self.participant.vars['task_4_payment'] = "Task 3"
             self.participant.vars['final_task_earnings'] = int(task_3_final_score) * 5
 
-        self.participant.vars['final_earnings'] = self.participant.vars['final_task_earnings'] + Constants.showup_Fee
+        self.participant.vars['final_earnings'] = self.participant.vars['final_task_earnings'] + self.participant.vars['riskaversion_score'] + Constants.showup_Fee
 
         ########################################################################################
         ########## save to data structures @####################################################
@@ -231,5 +231,4 @@ class HoldOn(Page):
             'final_earnings_2': self.participant.vars['final_earnings'],
 
             'debug': settings.DEBUG,
-
         }

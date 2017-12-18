@@ -111,9 +111,9 @@ SESSION_CONFIGS = [
         'display_name': "The whole experiment",
         'num_demo_participants': 4,
         'app_sequence': [
-            'intro', 'ret1', 'ret2'
+            'intro', 'ret1', 'ret2', 'ret3', 'survey'
         ],
-        'ret_timer': 300,
+        'ret_timer': 60,
         'showupfee': 30,
     },
     {

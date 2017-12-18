@@ -10,8 +10,8 @@ from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants
 
-class Intro(Page):
 
+class Intro(Page):
     form_model = models.Player
     form_fields = ['task_payment_choose']
 
@@ -32,27 +32,23 @@ class Intro(Page):
             'debug': settings.DEBUG,
         }
 
+
 class Wait(WaitPage):
-
     def is_displayed(self):
-
         if self.round_number == 1:
             self.participant.vars['start_time'] = None
 
         return self.round_number == 1
-
 
     def vars_for_template(self):
         return {
             'debug': settings.DEBUG,
         }
 
-class SumTask(Page):
 
+class SumTask(Page):
     form_model = models.Player
     form_fields = ['user_total']
-
-    # timeout_seconds = self.player.ret_timer # time? no, only works on specific pages
 
     def get_timeout_seconds(self):
         return self.participant.vars['expiry_timestamp'] - time.time()
@@ -85,19 +81,18 @@ class SumTask(Page):
         }
 
     def before_next_page(self):
-        self.player.score_round()
+        self.group.score_round()
 
 
 class ResultsWaitPage(WaitPage):
     def is_displayed(self):
-        return self.round_number == Constants.num_rounds - 1
+        return self.round_number == Constants.num_rounds
+
     def after_all_players_arrive(self):
-        pass
+        self.group.score_round()
 
 
 class Results(Page):
-
-
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
 
@@ -196,5 +191,4 @@ class Results(Page):
         }
 
 
-page_sequence = [Intro, Wait, SumTask, ResultsWaitPage, Results]
-
+page_sequence = [Intro, SumTask, ResultsWaitPage, Results]
