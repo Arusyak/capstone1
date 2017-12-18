@@ -160,16 +160,21 @@ class Group(BaseGroup):
                 max_score_counter = max_score_counter + 1
 
         if max_score_counter > 1:
-            # deal with ties
+            if self.task_2_score == top_score:
+                    if self.id_in_group == 3 or self.id_in_group == 4:
+                        self.task_2_final_score = 4 * self.task_2_score
+                    else:
+                        self.task_2_final_score = 0
 
         else: 
+            if self.task_2_score == top_score:
+                self.task_2_final_score = 4 * self.task_2_score
+            else:
+                self.task_2_final_score = 0
             # deal with a single winner
             # loop oVER ALL scores assuming one one winner
             # times their score by 1
             # everyone else gets zero
-
-
-
 
 
 

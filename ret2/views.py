@@ -79,53 +79,6 @@ class Results(Page):
 
     def vars_for_template(self):
 
-        # get other player's scores
-        op_scores = []
-
-        # loop over scores
-        for op in self.player.get_others_in_group():
-            op_scores.append(int(op.participant.vars['task_2_score']))
-
-        # # randomly draw op scores...
-        # while (len(op_scores) < 3):
-        #     op = self.player.get_others_in_group()[random.randint(0,len(self.player.get_others_in_group())-1)] #draw a random competitor
-        #     if int(op.participant.vars['task_2_score']) > 0: # may have null players, check if they are before including their scores.
-        #         op_scores.append(int(op.participant.vars['task_2_score']))
-
-        self.participant.vars['task_2_op_scores'] = op_scores  # save other player scores for score task3
-
-        top_score = max(op_scores)
-
-        if self.participant.vars['task_2_score'] > top_score:
-            result_print = "You have the top score."
-            self.participant.vars['task_2_final_score'] = 4 * self.participant.vars['task_2_score']
-        elif self.participant.vars['task_2_score'] == top_score:
-
-            # get list of all score
-            z = copy.copy(op_scores)
-            z.append(self.participant.vars['task_2_score'])
-
-            # count number of top scores
-            cnt = 0
-            for i in z:
-                if i == top_score:
-                    cnt += 1
-            # roll a cnt sided die (there are at least two)
-            if random.uniform(0, 1) <= 1 / cnt:
-                result_print = "You are tied for the top score. Including you, there were " + str(
-                    cnt) + " players with the top score. The winner was chosen randomly among the  " + str(
-                    cnt) + " top scorers. Good news, you won!"
-                self.participant.vars['task_2_final_score'] = 4 * self.participant.vars['task_2_score']
-            else:
-                result_print = "You are tied for the top score. Including you, there were " + str(
-                    cnt) + " players with the top score. The winner was chosen randomly among the  " + str(
-                    cnt) + " top scorers. Sorry, you didn't win."
-                self.participant.vars['task_2_final_score'] = 0
-
-        else:
-            result_print = "You do not have the top score."
-            self.participant.vars['task_2_final_score'] = 0
-
         # only keep obs if YourEntry player_sum, is not None.
         table_rows = []
         for prev_player in self.player.in_all_rounds():
@@ -150,11 +103,8 @@ class Results(Page):
         return {
             'debug': settings.DEBUG,
             'table_rows': table_rows,
-            'total_payoff':round(self.participant.vars['task_2_score']),
-            'op_scores':op_scores,
-            'top_score':round(top_score),
-            'final_score':round(self.participant.vars['task_2_final_score']),
-            'result_print':result_print,
+         #   'total_payoff':self.participant.vars['task_2_score'],
+         #   'final_score':self.participant.vars['task_2_final_score'],
         }
 
         # def before_next_page(self):
