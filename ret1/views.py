@@ -33,10 +33,12 @@ class task(Page):
 
     def vars_for_template(self):
 
-        def html_table_64(arr):
+        self.player.solution = sum(Constants.INTS_T2[self.round_number-1])
+
+        def html_table_64(arr): # converts Constants.INTS_2 array into an html matrix
           cnt = 0
           result = ""
-          result = result + '<table align="center" class="mat">'
+          result = result + '<table align="center" class="mat">' #note class mat, see task template. 
           for row in range(8):
             result = result + '  <tr>'
             for cell in range(8):
@@ -69,6 +71,7 @@ class task(Page):
             'correct_last_round': correct_last_round,
             'matrix_array':Constants.INTS_T2[self.round_number-1],
             'matrix':html_table_64(Constants.INTS_T2[self.round_number-1]),
+            'correct_sum':self.player.solution
         }
 
     def before_next_page(self):
