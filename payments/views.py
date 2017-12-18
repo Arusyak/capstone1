@@ -8,18 +8,6 @@ from otree.api import Currency as c, currency_range
 from .models import Constants
 
 
-class PaymentInfo(Page):
-
-    def vars_for_template(self):
-        participant = self.participant
-        return {
-            'redemption_code': participant.label or participant.code,
-        }
-
-
-page_sequence = [PaymentInfo]
-
-
 class HoldOn(Page):
     def is_displayed(self):
         return self.round_number == 1
@@ -84,14 +72,14 @@ class HoldOn(Page):
         else:
             task_3_final_score = 6903
 
+        if 'risk_aversion_score' in self.participant.vars:
+            risk_aversion_score = self.participant.vars['risk_aversion_score']
+        else:
+            risk_aversion_score = 6904
 
-        t1_results_table = self.participant.vars['t1_results']
-        t2_results_table = self.participant.vars['t2_results']
-        t3_results_table = self.participant.vars['t3_results']
 
         ########################################################################################
         ######## select a task randomly for payment ############################################
-
         if random.uniform(0, 1) <= 1 / 3:
             self.participant.vars['task_4_payment'] = "Task 1"
             self.participant.vars['final_task_earnings'] = int(task_1_score) * 5
@@ -102,7 +90,7 @@ class HoldOn(Page):
             self.participant.vars['task_4_payment'] = "Task 3"
             self.participant.vars['final_task_earnings'] = int(task_3_final_score) * 5
 
-        self.participant.vars['final_earnings'] = self.participant.vars['final_task_earnings'] + self.participant.vars['riskaversion_score'] + Constants.showup_Fee
+        self.participant.vars['final_earnings'] = self.participant.vars['final_task_earnings'] + self.participant.vars['risk_aversion_score'] + Constants.showup_Fee
 
         ########################################################################################
         ########## save to data structures @####################################################
@@ -127,36 +115,32 @@ class HoldOn(Page):
 
         ########################################################################################
         return {
-            't1_results_table': t1_results_table,
-            't1_results_table_2': self.participant.vars['t1_results'],
 
             'task_1_score': task_1_score,
             'task_1_score_2': self.player.task_1_score,
 
             'op_scores': op_scores,
-            't2_results_table': t2_results_table,
             'task_2_score': task_2_score,
             'task_2_final_score': task_2_final_score,
 
             'op_scores_2': self.player.op_scores,
             'op_top_score_2': self.player.op_top_score,
-            't2_results_table_2': self.participant.vars['t2_results'],
             'task_2_score_2': self.player.task_2_score,
             'task_2_final_score_2': self.player.task_2_final_score,
             't2_result_print_2': self.participant.vars['t2_result_print'],
 
             'payment_method_selection': payment_method_selection,
-            't3_results_table': t3_results_table,
             'task_3_score': task_3_score,
             'task_3_score_4X': task_3_score * 4,
             'task_3_final_score': task_3_final_score,
 
             'payment_method_selection_2': self.participant.vars['payment_method_selection'],
-            't3_results_table_2': self.participant.vars['t3_results'],
             'task_3_score_2': self.player.task_3_score,
             'task_3_score_4X_2': self.player.task_3_score * 4,
             'task_3_final_score_2': self.player.task_3_final_score,
             't3_result_print_2': self.participant.vars['t3_result_print'],
+
+            'risk_aversion_score': risk_aversion_score,
 
             'task_4_payment': self.participant.vars['task_4_payment'],
             'final_task_earnings': self.participant.vars['final_task_earnings'],
@@ -170,3 +154,37 @@ class HoldOn(Page):
 
             'debug': settings.DEBUG,
         }
+
+
+class PaymentInfo(Page):
+
+    def vars_for_template(self):
+        return {
+
+            'task_1_score': self.player.task_1_score,
+
+            'op_scores': self.player.op_scores,
+            'op_top_score': self.player.op_top_score,
+            'task_2_score': self.player.task_2_score,
+            'task_2_final_score': self.player.task_2_final_score,
+            't2_result_print': self.participant.vars['t2_result_print'],
+
+            'payment_method_selection': self.participant.vars['payment_method_selection'],
+            'task_3_score': self.player.task_3_score,
+            'task_3_score_4X': self.player.task_3_score * 4,
+            'task_3_final_score': self.player.task_3_final_score,
+            't3_result_print': self.participant.vars['t3_result_print'],
+
+            'risk_aversion_score': self.participant.vars['risk_aversion_score'],
+
+            'task_4_payment': self.participant.vars['task_4_payment'],
+            'final_task_earnings': self.participant.vars['final_task_earnings'],
+            'showup_Fee': Constants.showup_Fee,
+            'final_earnings': self.participant.vars['final_earnings'],
+
+            'debug': settings.DEBUG,
+
+        }
+
+
+page_sequence = [HoldOn, PaymentInfo]

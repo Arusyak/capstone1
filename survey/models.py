@@ -79,9 +79,8 @@ class Player(BasePlayer):
             doc='Please pick one of the following.',
             widget=widgets.RadioSelect())
 
-    def riskaversion_score(self):
+    def risk_aversion_score(self):
         x = random.randint(0, 1)
-
         return {
             '8 AED for certain': [8, 8],
             '12 AED or 6 AED with a 50% chance':[12, 6],
@@ -89,7 +88,6 @@ class Player(BasePlayer):
             '20 AED or 2 AED with a 50% chance':[20, 2],
             '24 AED or 0 AED with a 50% chance':[24, 0]
         }[self.q_riskaversion][x]
-
 
     q_riskpreference = models.CharField(
             initial=None,
@@ -100,7 +98,7 @@ class Player(BasePlayer):
 
     def vars_for_template(self):
         return {
-            "risk aversion result": self.q_riskaversion
+            "risk_aversion_score": self.q_riskaversion
         }
 
     q_mathlevel = models.CharField(
