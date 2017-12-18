@@ -119,7 +119,7 @@ SESSION_CONFIGS = [
     {
         'name': 'ret1',
         'display_name': "Real Effort Task - Adding Task",
-        'num_demo_participants': 1,
+        'num_demo_participants': 4,
         'app_sequence': [
            'intro', 'ret1',
         ],
