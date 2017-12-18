@@ -143,6 +143,37 @@ class Group(BaseGroup):
 
             PLAYER.participant.vars['task_2_score'] = total_payoff
 
+    def set_task_score(self):
+
+        all_scores = []
+        for Player in self.get_players():
+            all_scores.append(int(Player.participant.vars['task_2_score']))
+        
+        op_scores = []
+        for op in self.player.get_others_in_group():
+            op_scores.append(int(op.participant.vars['task_2_score']))
+
+        top_score = max(all_scores)
+        max_score_counter = 0
+        for Player in self.get_players():
+            if int(Player.participant.vars['task_2_score']) == top_score:
+                max_score_counter = max_score_counter + 1
+
+        if max_score_counter > 1:
+            # deal with ties
+
+        else: 
+            # deal with a single winner
+            # loop oVER ALL scores assuming one one winner
+            # times their score by 1
+            # everyone else gets zero
+
+
+
+
+
+
+
 class Player(BasePlayer):
 
 
