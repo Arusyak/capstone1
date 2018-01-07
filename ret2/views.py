@@ -98,12 +98,10 @@ class Results(Page):
 
     def vars_for_template(self):
 
-        # total_payoff = 0
-        # for p in self.player.in_all_rounds():
-        #     if p.payoff_score != None:
-        #         total_payoff += p.payoff_score
-        #
-        # self.participant.vars['task_2_score'] = total_payoff
+        total_payoff = 0
+        for p in self.player.in_all_rounds():
+            if p.payoff_score != None:
+                total_payoff += p.payoff_score
 
         # only keep obs if YourEntry player_sum, is not None.
         table_rows = []
@@ -124,8 +122,9 @@ class Results(Page):
         return {
             'debug': settings.DEBUG,
             'table_rows': table_rows,
-            'total_payoff': self.participant.vars['task_2_score'],
-        #    'task_2_final_score': self.participant.vars['task_2_final_score'],
+            'task_2_score': self.participant.vars['task_2_score'],
+            # 'task_2_op_scores': self.participant.vars['task_2_op_scores'],
+            # 'task_2_final_score': self.participant.vars['task_2_final_score'],
         }
 
         # def before_next_page(self):

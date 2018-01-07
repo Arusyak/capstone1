@@ -386,6 +386,7 @@ class Group(BaseGroup):
         op_scores = []
         for op in self.player.get_others_in_group():
             op_scores.append(int(op.participant.vars['task_2_score']))
+            self.participant.vars['task_2_op_scores'] = op_scores
 
         top_score = max(all_scores)
         max_score_counter = 0
@@ -394,17 +395,15 @@ class Group(BaseGroup):
                 max_score_counter = max_score_counter + 1
 
         for Player in self.get_players():
-            task_2_final_score = 0
             if max_score_counter > 1:
-                for op in self.player.get_others_in_group():
-                    if self.task_2_score == op.participant.task_2_score == top_score:
-                        if self.id_in_group > op.participant.id_in_group:
-                            task_2_final_score = 4 * Player.task_2_score
-                        else:
-                            task_2_final_score = 0
+                if self.task_2_score == op.task_2_score == top_score:
+                    if Player.id_in_group > op.id_in_group:
+                        task_2_final_score = 4 * self.task_2_score
+                    else:
+                        task_2_final_score = 0
             else:
-                if Player.task_2_score == top_score:
-                    task_2_final_score = 4 * Player.task_2_score
+                if self.task_2_score == top_score:
+                    task_2_final_score = 4 * self.task_2_score
                 else:
                     task_2_final_score = 0
 
