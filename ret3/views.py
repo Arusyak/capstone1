@@ -1,44 +1,26 @@
 import copy
-import random
 
-import time
-
-from otree.api import Currency as c, currency_range
-
-import settings
 from . import models
 from ._builtin import Page, WaitPage
+from otree.api import Currency as c, currency_range
 from .models import Constants
+from django.conf import settings
+import time
+import random
 
 
 class Intro(Page):
-    form_model = models.Player
-    form_fields = ['task_payment_choose']
-
     def is_displayed(self):
         if self.round_number == 1:
             self.participant.vars['start_time'] = None
             self.participant.vars['end_time'] = None
-            self.participant.vars['task_3_score'] = 0
+            self.participant.vars['task_2_score'] = 0
 
             return self.round_number == 1
 
     def before_next_page(self):
         # user has ret_timer seconds to complete as many pages as possible
         self.participant.vars['expiry_timestamp'] = time.time() + self.player.task_timer
-
-    def vars_for_template(self):
-        return {
-            'debug': settings.DEBUG,
-        }
-
-
-class Wait(WaitPage):
-    def is_displayed(self):
-        if self.round_number == 1:
-            self.participant.vars['start_time'] = None
-
-        return self.round_number == 1
 
     def vars_for_template(self):
         return {
@@ -57,6 +39,21 @@ class SumTask(Page):
         return self.participant.vars['expiry_timestamp'] - time.time() > 3
 
     def vars_for_template(self):
+        self.player.solution = sum(Constants.INTS_T4[self.round_number - 1])
+
+        def html_table_64(arr):  # converts Constants.INTS_2 array into an html matrix
+            cnt = 0
+            result = ""
+            result = result + '<table align="center" class="mat">'  # note class mat, see task template.
+            for row in range(8):
+                result = result + '  <tr>'
+                for cell in range(8):
+                    result = result + '    <td>' + str(arr[cnt]) + '</td>'
+                    cnt = cnt + 1
+                result = result + '</tr>'
+            result = result + '</table>'
+
+            return (result)
 
         # current number of correctly done tasks
         total_payoff = 0
@@ -78,11 +75,13 @@ class SumTask(Page):
             'round_count': (self.round_number - 1),
             'debug': settings.DEBUG,
             'correct_last_round': correct_last_round,
+            'matrix_array': Constants.INTS_T4[self.round_number - 1],
+            'matrix': html_table_64(Constants.INTS_T4[self.round_number - 1]),
+            'correct_sum': self.player.solution
         }
 
     def before_next_page(self):
-        self.group.score_round()
-
+        self.player.score_round()
 
 class ResultsWaitPage(WaitPage):
     def is_displayed(self):
@@ -108,7 +107,7 @@ class Results(Page):
         for prev_player in self.player.in_all_rounds():
             if prev_player.task_payment_choose != None:
                 payment_method_selection = prev_player.task_payment_choose
-            if payment_method_selection == None:
+            if prev_player.task_payment_choose == None:
                 payment_method_selection = "no input (compared scoring)"
         self.participant.vars['payment_method_selection'] = payment_method_selection
 
@@ -164,11 +163,6 @@ class Results(Page):
             if prev_player.user_total != None:
                 row = {
                     'round_number': prev_player.round_number,
-                    'int1': prev_player.int1,
-                    'int2': prev_player.int2,
-                    'int3': prev_player.int3,
-                    'int4': prev_player.int4,
-                    'int5': prev_player.int5,
                     'Ints_sum': prev_player.solution,
                     'player_sum': prev_player.user_total,
                     'is_correct': prev_player.is_correct,
