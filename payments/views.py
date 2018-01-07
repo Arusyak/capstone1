@@ -72,10 +72,10 @@ class HoldOn(Page):
         else:
             task_3_final_score = 6903
 
-        if 'risk_aversion_score' in self.participant.vars:
-            risk_aversion_score = self.participant.vars['risk_aversion_score']
-        else:
-            risk_aversion_score = 6904
+        # if 'risk_aversion_score' in self.participant.vars:
+        #     risk_aversion_score = self.participant.vars['risk_aversion_score']
+        # else:
+        #     risk_aversion_score = 6904
 
 
         ########################################################################################
@@ -90,7 +90,8 @@ class HoldOn(Page):
             self.participant.vars['task_4_payment'] = "Task 3"
             self.participant.vars['final_task_earnings'] = int(task_3_final_score) * 5
 
-        self.participant.vars['final_earnings'] = self.participant.vars['final_task_earnings'] + self.participant.vars['risk_aversion_score'] + Constants.showup_Fee
+        self.participant.vars['final_earnings'] = self.participant.vars['final_task_earnings'] + Constants.showup_Fee
+                                                  # self.participant.vars['risk_aversion_score'] +
 
         ########################################################################################
         ########## save to data structures @####################################################
@@ -127,7 +128,7 @@ class HoldOn(Page):
             'op_top_score_2': self.player.op_top_score,
             'task_2_score_2': self.player.task_2_score,
             'task_2_final_score_2': self.player.task_2_final_score,
-            't2_result_print_2': self.participant.vars['t2_result_print'],
+            # 't2_result_print_2': self.participant.vars['t2_result_print'],
 
             'payment_method_selection': payment_method_selection,
             'task_3_score': task_3_score,
@@ -138,9 +139,9 @@ class HoldOn(Page):
             'task_3_score_2': self.player.task_3_score,
             'task_3_score_4X_2': self.player.task_3_score * 4,
             'task_3_final_score_2': self.player.task_3_final_score,
-            't3_result_print_2': self.participant.vars['t3_result_print'],
+            # 't3_result_print_2': self.participant.vars['t3_result_print'],
 
-            'risk_aversion_score': risk_aversion_score,
+            # 'risk_aversion_score': risk_aversion_score,
 
             'task_4_payment': self.participant.vars['task_4_payment'],
             'final_task_earnings': self.participant.vars['final_task_earnings'],
@@ -167,15 +168,15 @@ class PaymentInfo(Page):
             'op_top_score': self.player.op_top_score,
             'task_2_score': self.player.task_2_score,
             'task_2_final_score': self.player.task_2_final_score,
-            't2_result_print': self.participant.vars['t2_result_print'],
+            # 't2_result_print': self.participant.vars['t2_result_print'],
 
             'payment_method_selection': self.participant.vars['payment_method_selection'],
             'task_3_score': self.player.task_3_score,
             'task_3_score_4X': self.player.task_3_score * 4,
             'task_3_final_score': self.player.task_3_final_score,
-            't3_result_print': self.participant.vars['t3_result_print'],
+            # 't3_result_print': self.participant.vars['t3_result_print'],
 
-            'risk_aversion_score': self.participant.vars['risk_aversion_score'],
+            # 'risk_aversion_score': self.participant.vars['risk_aversion_score'],
 
             'task_4_payment': self.participant.vars['task_4_payment'],
             'final_task_earnings': self.participant.vars['final_task_earnings'],

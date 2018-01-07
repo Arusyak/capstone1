@@ -106,11 +106,6 @@ class Results(Page):
                 if (prev_player.user_total > 0):
                     row = {
                         'round_number': prev_player.round_number,
-                        # 'int1': prev_player.int1,
-                        # 'int2': prev_player.int2,
-                        # 'int3': prev_player.int3,
-                        # 'int4': prev_player.int4,
-                        # 'int5': prev_player.int5,
                         'Ints_sum': prev_player.solution,
                         'player_sum': round(prev_player.user_total),
                         'is_correct': prev_player.is_correct,

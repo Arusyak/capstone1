@@ -20,7 +20,6 @@
         <table class="table">
             <tr>
                 <th style="text-align: center;">Summation #</th>
-                <th style="text-align: center;">Intergers</th>
                 <th style="text-align: center;">Solution</th>
                 <th style="text-align: center;">Your Entry</th>
                 <th style="text-align: center;">Correct?</th>
@@ -29,7 +28,6 @@
             {% for row in table_rows %}
             <tr>
                 <td align="center">{{ row.round_number }}</td>
-                <td align="center">{{ row.int1 }} + {{ row.int2 }} + {{ row.int3 }} + {{ row.int4 }} + {{ row.int5 }}</td>
                 <td align="center">{{ row.Ints_sum }}</td>
                 <td align="center">{{ row.player_sum }}</td>
                 <td align="center">{{ row.is_correct }}</td>

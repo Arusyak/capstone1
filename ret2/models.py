@@ -14,6 +14,7 @@ from otree.api import (
     Currency as c, currency_range
 )
 import random
+
 # </standard imports>
 
 author = 'Curtis Kephart (economicurtis@gmail.com)'
@@ -26,8 +27,8 @@ Real Effort Task. Add as many ints as possible.
 class Constants(BaseConstants):
     name_in_url = 'task_sum2'
     players_per_group = 4
-    task_timer = 60 #see Subsession, before_session_starts setting.
-    num_rounds = 60 # must be more than the max one person can do in task_timer seconds
+    task_timer = 60  # see Subsession, before_session_starts setting.
+    num_rounds = 60  # must be more than the max one person can do in task_timer seconds
 
     INTS_T3 = [
         [0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0,
@@ -274,7 +275,6 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-
     def before_session_starts(self):
 
         players = self.get_players()
@@ -349,42 +349,40 @@ class Subsession(BaseSubsession):
             p.int62 = Constants.INTS_T3[self.round_number - 1][61]
             p.int63 = Constants.INTS_T3[self.round_number - 1][62]
             p.int64 = Constants.INTS_T3[self.round_number - 1][63]
-            p.solution = p.int1 + p.int2 + p.int3 + p.int4 + p.int5+ p.int6 + p.int7 + p.int8\
-                         + p.int9 + p.int10 +p.int11 + p.int12 + p.int13 + p.int14 + p.int15+ p.int16\
-                         + p.int17 + p.int18 + p.int19 + p.int20 + p.int21 + p.int22 + p.int23 + p.int24\
+            p.solution = p.int1 + p.int2 + p.int3 + p.int4 + p.int5 + p.int6 + p.int7 + p.int8 \
+                         + p.int9 + p.int10 + p.int11 + p.int12 + p.int13 + p.int14 + p.int15 + p.int16 \
+                         + p.int17 + p.int18 + p.int19 + p.int20 + p.int21 + p.int22 + p.int23 + p.int24 \
                          + p.int25 + p.int26 + p.int27 + p.int28 + p.int29 + p.int30 + p.int31 + p.int32 \
                          + p.int33 + p.int34 + p.int35 + p.int36 + p.int37 + p.int38 + p.int39 + p.int40 \
-                         + p.int41 + p.int42 + p.int43 + p.int44 + p.int45 + p.int46 + p.int47 + p.int48\
+                         + p.int41 + p.int42 + p.int43 + p.int44 + p.int45 + p.int46 + p.int47 + p.int48 \
                          + p.int49 + p.int50 + p.int51 + p.int52 + p.int53 + p.int54 + p.int55 + p.int56 \
                          + p.int57 + p.int58 + p.int59 + p.int60 + p.int61 + p.int62 + p.int63 + p.int64
 
-class Group(BaseGroup):
 
+class Group(BaseGroup):
     def score_round(self):
         # update player payoffs
-        for PLAYER in self.get_players():
-            if (PLAYER.solution == PLAYER.user_total):
-                PLAYER.is_correct = True
-                PLAYER.payoff_score = 1
+        for Player in self.get_players():
+            if (Player.solution == Player.user_total):
+                Player.is_correct = True
+                Player.payoff_score = 1
             else:
-                PLAYER.is_correct = False
-                PLAYER.payoff_score = c(0)
+                Player.is_correct = False
+                Player.payoff_score = c(0)
 
-
-        for PLAYER in self.get_players():
+        for Player in self.get_players():
             total_payoff = 0
-            for p in PLAYER.in_all_rounds():
+            for p in Player.in_all_rounds():
                 if p.payoff_score != None:
                     total_payoff += p.payoff_score
 
-            PLAYER.participant.vars['task_2_score'] = total_payoff
+            Player.participant.vars['task_2_score'] = total_payoff
 
     def set_task_score(self):
-
         all_scores = []
         for Player in self.get_players():
             all_scores.append(int(Player.participant.vars['task_2_score']))
-        
+
         op_scores = []
         for op in self.player.get_others_in_group():
             op_scores.append(int(op.participant.vars['task_2_score']))
@@ -395,28 +393,25 @@ class Group(BaseGroup):
             if int(Player.participant.vars['task_2_score']) == top_score:
                 max_score_counter = max_score_counter + 1
 
-        if max_score_counter > 1:
-            if self.task_2_score == top_score:
-                    if self.id_in_group == 3 or self.id_in_group == 4:
-                        self.task_2_final_score = 4 * self.task_2_score
-                    else:
-                        self.task_2_final_score = 0
-
-        else: 
-            if self.task_2_score == top_score:
-                self.task_2_final_score = 4 * self.task_2_score
+        for Player in self.get_players():
+            task_2_final_score = 0
+            if max_score_counter > 1:
+                for op in self.player.get_others_in_group():
+                    if self.task_2_score == op.participant.task_2_score == top_score:
+                        if self.id_in_group > op.participant.id_in_group:
+                            task_2_final_score = 4 * Player.task_2_score
+                        else:
+                            task_2_final_score = 0
             else:
-                self.task_2_final_score = 0
-            # deal with a single winner
-            # loop oVER ALL scores assuming one one winner
-            # times their score by 1
-            # everyone else gets zero
+                if Player.task_2_score == top_score:
+                    task_2_final_score = 4 * Player.task_2_score
+                else:
+                    task_2_final_score = 0
 
-
+            Player.participant.vars['task_2_final_score'] = task_2_final_score
 
 
 class Player(BasePlayer):
-
     def score_round(self):
         # update player payoffs
         if (self.solution == self.user_total):
@@ -434,14 +429,14 @@ class Player(BasePlayer):
         doc="this round's correct summation")
 
     user_total = models.PositiveIntegerField(
-        min = 1,
-        max = 9999,
+        min=1,
+        max=9999,
         doc="user's summation",
-        widget=widgets.TextInput(attrs={'autocomplete':'off'}))
+        widget=widgets.TextInput(attrs={'autocomplete': 'off'}))
 
     is_correct = models.BooleanField(
         doc="did the user get the task correct?")
 
     payoff_score = models.FloatField(
-            doc = '''score in this task'''
-        )
+        doc='''score in this task'''
+    )

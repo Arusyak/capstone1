@@ -39,6 +39,21 @@ class SumTask(Page):
         return self.participant.vars['expiry_timestamp'] - time.time() > 3
 
     def vars_for_template(self):
+        self.player.solution = sum(Constants.INTS_T3[self.round_number - 1])
+
+        def html_table_64(arr):  # converts Constants.INTS_2 array into an html matrix
+            cnt = 0
+            result = ""
+            result = result + '<table align="center" class="mat">'  # note class mat, see task template.
+            for row in range(8):
+                result = result + '  <tr>'
+                for cell in range(8):
+                    result = result + '    <td>' + str(arr[cnt]) + '</td>'
+                    cnt = cnt + 1
+                result = result + '</tr>'
+            result = result + '</table>'
+
+            return (result)
 
         # current number of correctly done tasks
         total_payoff = 0
@@ -60,10 +75,13 @@ class SumTask(Page):
             'round_count': (self.round_number - 1),
             'debug': settings.DEBUG,
             'correct_last_round': correct_last_round,
+            'matrix_array': Constants.INTS_T3[self.round_number - 1],
+            'matrix': html_table_64(Constants.INTS_T3[self.round_number - 1]),
+            'correct_sum': self.player.solution
         }
 
     def before_next_page(self):
-        self.group.score_round()
+        self.player.score_round()
 
 
 class ResultsWaitPage(WaitPage):
@@ -73,11 +91,19 @@ class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
         self.group.score_round()
 
+
 class Results(Page):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
 
     def vars_for_template(self):
+
+        # total_payoff = 0
+        # for p in self.player.in_all_rounds():
+        #     if p.payoff_score != None:
+        #         total_payoff += p.payoff_score
+        #
+        # self.participant.vars['task_2_score'] = total_payoff
 
         # only keep obs if YourEntry player_sum, is not None.
         table_rows = []
@@ -86,11 +112,6 @@ class Results(Page):
                 if (prev_player.user_total > 0):
                     row = {
                         'round_number': prev_player.round_number,
-                        'int1': prev_player.int1,
-                        'int2': prev_player.int2,
-                        'int3': prev_player.int3,
-                        'int4': prev_player.int4,
-                        'int5': prev_player.int5,
                         'Ints_sum': prev_player.solution,
                         'player_sum': round(prev_player.user_total),
                         'is_correct': prev_player.is_correct,
@@ -103,8 +124,8 @@ class Results(Page):
         return {
             'debug': settings.DEBUG,
             'table_rows': table_rows,
-         #   'total_payoff':self.participant.vars['task_2_score'],
-         #   'final_score':self.participant.vars['task_2_final_score'],
+            'total_payoff': self.participant.vars['task_2_score'],
+        #    'task_2_final_score': self.participant.vars['task_2_final_score'],
         }
 
         # def before_next_page(self):
