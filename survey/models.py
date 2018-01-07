@@ -81,13 +81,17 @@ class Player(BasePlayer):
 
     def risk_aversion_score(self):
         x = random.randint(0, 1)
-        return {
-            '8 AED for certain': [8, 8],
-            '12 AED or 6 AED with a 50% chance':[12, 6],
-            '16 AED or 4 AED with a 50% chance':[16, 4],
-            '20 AED or 2 AED with a 50% chance':[20, 2],
-            '24 AED or 0 AED with a 50% chance':[24, 0]
-        }[self.q_riskaversion][x]
+        if self.q_riskaversion == None:
+            return 0
+        else:
+            return {
+                '8 AED for certain': [8, 8],
+                '12 AED or 6 AED with a 50% chance':[12, 6],
+                '16 AED or 4 AED with a 50% chance':[16, 4],
+                '20 AED or 2 AED with a 50% chance':[20, 2],
+                '24 AED or 0 AED with a 50% chance':[24, 0]
+            }[self.q_riskaversion][x]
+
 
     q_riskpreference = models.CharField(
             initial=None,

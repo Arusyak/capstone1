@@ -30,7 +30,7 @@ class RiskPreference(Page):
 
     def vars_for_template(self):
         return {
-            "risk aversion result": self.player.riskaversion_score()
+            "risk aversion result": self.player.risk_aversion_score()
         }
 
 
@@ -56,9 +56,10 @@ class ExpectedStudyTrack(Page):
     def is_displayed(self):
         return self.player.q_majordeclarationYN == "No"
 
-    # def error_message(self):
-
-    #         return 'Please select only one or two choices'
+    def error_message(self, values):
+        if values['q_declaredstudytrack_AH'] + values['q_declaredstudytrack_EG']+values['q_declaredstudytrack_MD']\
+                + values['q_declaredstudytrack_SC'] + values['q_declaredstudytrack_SS'] >> 2:
+            return 'You may not check more than two academic divisions.'
 
 
 class DeclaredStudyTrack(Page):
@@ -93,9 +94,9 @@ class GPAStudyTrack(Page):
         if values['q_gpastudytrack_AH'] == values['q_gpastudytrack_EG'] == values['q_gpastudytrack_MD']\
                 == values['q_gpastudytrack_SC'] == values['q_gpastudytrack_SS']==3:
             return 'Please select each rank only once'
-        # if values['q_gpastudytrack_AH'] == values['q_gpastudytrack_EG'] or values['q_gpastudytrack_MD']\
-        #         =! values['q_gpastudytrack_SC'] =! values['q_gpastudytrack_SS']:
-        #     return 'Please select each rank only once'
+        if values['q_gpastudytrack_AH'] != 1 or values['q_gpastudytrack_EG'] != 1 or values['q_gpastudytrack_MD'] != 1\
+                or values['q_gpastudytrack_SC'] != 1 or values['q_gpastudytrack_SS']!= 1:
+            return 'Please select each rank only once'
 
 
 class ProfitableStudyTrack(Page):
@@ -155,7 +156,7 @@ class Statements2(Page):
 class Results(Page):
     def vars_for_template(self):
         return {
-            "risk aversion result":self.player.riskaversion_score()
+            "risk aversion result":self.player.risk_aversion_score()
         }
 
 
