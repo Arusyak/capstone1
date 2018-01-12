@@ -277,7 +277,6 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
     def before_session_starts(self):
 
-        players = self.get_players()
         if 'task_timer' in self.session.config:
             task_timer = self.session.config['task_timer']
         else:
@@ -362,26 +361,26 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     def score_round(self):
         # update player payoffs
-        for Player in self.get_players():
-            if (Player.solution == Player.user_total):
-                Player.is_correct = True
-                Player.payoff_score = 1
+        for PLAYER in self.get_players():
+            if PLAYER.solution == PLAYER.user_total:
+                PLAYER.is_correct = True
+                PLAYER.payoff_score = 1
             else:
-                Player.is_correct = False
-                Player.payoff_score = c(0)
+                PLAYER.is_correct = False
+                PLAYER.payoff_score = c(0)
 
-        for Player in self.get_players():
+        for PLAYER in self.get_players():
             total_payoff = 0
-            for p in Player.in_all_rounds():
-                if p.payoff_score != None:
+            for p in PLAYER.in_all_rounds():
+                if p.payoff_score is not None:
                     total_payoff += p.payoff_score
 
-            Player.participant.vars['task_2_score'] = total_payoff
+            PLAYER.participant.vars['task_2_score'] = total_payoff
 
     def set_task_score(self):
         all_scores = []
-        for Player in self.get_players():
-            all_scores.append(int(Player.participant.vars['task_2_score']))
+        for PLAYER in self.get_players():
+            all_scores.append(int(PLAYER.participant.vars['task_2_score']))
 
         op_scores = []
         for op in self.player.get_others_in_group():
@@ -390,14 +389,14 @@ class Group(BaseGroup):
 
         top_score = max(all_scores)
         max_score_counter = 0
-        for Player in self.get_players():
-            if int(Player.participant.vars['task_2_score']) == top_score:
+        for PLAYER in self.get_players():
+            if int(PLAYER.participant.vars['task_2_score']) == top_score:
                 max_score_counter = max_score_counter + 1
 
-        for Player in self.get_players():
+        for PLAYER in self.get_players():
             if max_score_counter > 1:
                 if self.task_2_score == op.task_2_score == top_score:
-                    if Player.id_in_group > op.id_in_group:
+                    if PLAYER.id_in_group > op.id_in_group:
                         task_2_final_score = 4 * self.task_2_score
                     else:
                         task_2_final_score = 0
@@ -407,13 +406,13 @@ class Group(BaseGroup):
                 else:
                     task_2_final_score = 0
 
-            Player.participant.vars['task_2_final_score'] = task_2_final_score
+            PLAYER.participant.vars['task_2_final_score'] = task_2_final_score
 
 
 class Player(BasePlayer):
     def score_round(self):
         # update player payoffs
-        if (self.solution == self.user_total):
+        if self.solution == self.user_total:
             self.is_correct = True
             self.payoff_score = 1
         else:

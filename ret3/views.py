@@ -53,12 +53,12 @@ class SumTask(Page):
                 result = result + '</tr>'
             result = result + '</table>'
 
-            return (result)
+            return result
 
         # current number of correctly done tasks
         total_payoff = 0
         for p in self.player.in_all_rounds():
-            if p.payoff_score != None:
+            if p.payoff_score is not None:
                 total_payoff += p.payoff_score
 
         # set up messgaes in transcription task
@@ -83,6 +83,7 @@ class SumTask(Page):
     def before_next_page(self):
         self.player.score_round()
 
+
 class ResultsWaitPage(WaitPage):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
@@ -99,13 +100,13 @@ class Results(Page):
 
         total_payoff = 0
         for p in self.player.in_all_rounds():
-            if p.payoff_score != None:
+            if p.payoff_score is not None:
                 total_payoff += p.payoff_score
 
         self.participant.vars['task_3_score'] = total_payoff
 
         for prev_player in self.player.in_all_rounds():
-            if prev_player.task_payment_choose != None:
+            if prev_player.task_payment_choose is not None:
                 payment_method_selection = prev_player.task_payment_choose
             if prev_player.task_payment_choose == None:
                 payment_method_selection = "no input (compared scoring)"
@@ -139,11 +140,13 @@ class Results(Page):
             # roll a cnt sided die (there are at least two)
             if random.uniform(0, 1) <= 1 / cnt:
                 result_print = "You are tied for the top score. Including you, there were " + str(
-                    cnt) + " players with the top score. The winner was chosen randomly among the top scorers. Good news, you won!"
+                    cnt) + "players with the top score. The winner was chosen randomly among the top scorers. Good " \
+                           "news, you won! "
                 self.participant.vars['task_3_cp_score'] = 4 * self.participant.vars['task_3_score']
             else:
                 result_print = "You are tied for the top score. Including you, there were " + str(
-                    cnt) + " players with the top score. The winner was chosen randomly among the top scorers. Sorry, you didn't win."
+                    cnt) + "players with the top score. The winner was chosen randomly among the top scorers. Sorry, " \
+                           "you didn't win. "
                 self.participant.vars['task_3_cp_score'] = 0
 
         else:
@@ -160,7 +163,7 @@ class Results(Page):
         # only keep obs if YourEntry player_sum, is not None.
         table_rows = []
         for prev_player in self.player.in_all_rounds():
-            if prev_player.user_total != None:
+            if prev_player.user_total is not None:
                 row = {
                     'round_number': prev_player.round_number,
                     'Ints_sum': prev_player.solution,
@@ -180,7 +183,7 @@ class Results(Page):
             'top_score': round(top_score),
             'task_3_cp_score': round(self.participant.vars['task_3_cp_score']),
             'final_score': round(self.participant.vars['task_3_final_score']),
-            'result_print': (result_print),
+            'result_print': result_print,
             'payment_method_selection': payment_method_selection,
         }
 

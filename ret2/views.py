@@ -53,12 +53,12 @@ class SumTask(Page):
                 result = result + '</tr>'
             result = result + '</table>'
 
-            return (result)
+            return result
 
         # current number of correctly done tasks
         total_payoff = 0
         for p in self.player.in_all_rounds():
-            if p.payoff_score != None:
+            if p.payoff_score is not None:
                 total_payoff += p.payoff_score
 
         # set up messgaes in transcription task
@@ -100,14 +100,14 @@ class Results(Page):
 
         total_payoff = 0
         for p in self.player.in_all_rounds():
-            if p.payoff_score != None:
+            if p.payoff_score is not None:
                 total_payoff += p.payoff_score
 
         # only keep obs if YourEntry player_sum, is not None.
         table_rows = []
         for prev_player in self.player.in_all_rounds():
-            if (prev_player.user_total != None):
-                if (prev_player.user_total > 0):
+            if prev_player.user_total is not None:
+                if prev_player.user_total > 0:
                     row = {
                         'round_number': prev_player.round_number,
                         'Ints_sum': prev_player.solution,

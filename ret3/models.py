@@ -13,25 +13,18 @@ from otree.api import (
     Currency as c, currency_range
 )
 import random
-
-
-
-
-# </standard imports>
-
-
-
 author = 'Curtis Kephart (economicurtis@gmail.com)'
 
 doc = """
 Real Effort Task. Add as many ints as possible.  
 """
 
+
 class Constants(BaseConstants):
     name_in_url = 'task_sum3'
     players_per_group = 4
-    task_timer = 60 #see Subsession, before_session_starts setting.
-    num_rounds = 70 # must be more than the max one person can do in task_timer seconds
+    task_timer = 60  # see Subsession, before_session_starts setting.
+    num_rounds = 70  # must be more than the max one person can do in task_timer seconds
 
     INTS_T4 = [
         [1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0,
@@ -240,7 +233,6 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
 
     def before_session_starts(self):
-        players = self.get_players()
         if 'task_timer' in self.session.config:
             task_timer = self.session.config['task_timer']
         else:
@@ -346,7 +338,7 @@ class Player(BasePlayer):
 
     def score_round(self):
         # update player payoffs
-        if (self.solution == self.user_total):
+        if self.solution == self.user_total:
             self.is_correct = True
             self.payoff_score = 1
         else:

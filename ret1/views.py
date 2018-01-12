@@ -7,7 +7,7 @@ import time
 import random
 
 
-class start(Page):
+class Intro(Page):
     def is_displayed(self):
         return self.round_number == 1
 
@@ -21,7 +21,7 @@ class start(Page):
         }
 
 
-class task(Page):
+class SumTask(Page):
     form_model = models.Player
     form_fields = ['user_total']
 
@@ -33,26 +33,26 @@ class task(Page):
 
     def vars_for_template(self):
 
-        self.player.solution = sum(Constants.INTS_T2[self.round_number-1])
+        self.player.solution = sum(Constants.INTS_T2[self.round_number - 1])
 
-        def html_table_64(arr): # converts Constants.INTS_2 array into an html matrix
-          cnt = 0
-          result = ""
-          result = result + '<table align="center" class="mat">' #note class mat, see task template. 
-          for row in range(8):
-            result = result + '  <tr>'
-            for cell in range(8):
-              result = result + '    <td>' + str(arr[cnt]) +'</td>'
-              cnt = cnt + 1
-            result = result + '</tr>'
-          result = result + '</table>'
+        def html_table_64(arr):  # converts Constants.INTS_2 array into an html matrix
+            cnt = 0
+            result = ""
+            result = result + '<table align="center" class="mat">'  # note class mat, see task template.
+            for row in range(8):
+                result = result + '  <tr>'
+                for cell in range(8):
+                    result = result + '    <td>' + str(arr[cnt]) + '</td>'
+                    cnt = cnt + 1
+                result = result + '</tr>'
+            result = result + '</table>'
 
-          return(result)
+            return result
 
         # current number of correctly done tasks
         total_payoff = 0
         for p in self.player.in_all_rounds():
-            if p.payoff_score != None:
+            if p.payoff_score is not None:
                 total_payoff += p.payoff_score
 
         # set up messgaes in transcription task
@@ -69,9 +69,9 @@ class task(Page):
             'round_count': (self.round_number - 1),
             'debug': settings.DEBUG,
             'correct_last_round': correct_last_round,
-            'matrix_array':Constants.INTS_T2[self.round_number-1],
-            'matrix':html_table_64(Constants.INTS_T2[self.round_number-1]),
-            'correct_sum':self.player.solution
+            'matrix_array': Constants.INTS_T2[self.round_number - 1],
+            'matrix': html_table_64(Constants.INTS_T2[self.round_number - 1]),
+            'correct_sum': self.player.solution
         }
 
     def before_next_page(self):
@@ -94,7 +94,7 @@ class Results(Page):
 
         total_payoff = 0
         for p in self.player.in_all_rounds():
-            if p.payoff_score != None:
+            if p.payoff_score is not None:
                 total_payoff += p.payoff_score
 
         self.participant.vars['task_1_score'] = total_payoff
@@ -102,8 +102,8 @@ class Results(Page):
         # only keep obs if YourEntry player_sum, is not None.
         table_rows = []
         for prev_player in self.player.in_all_rounds():
-            if (prev_player.user_total != None):
-                if (prev_player.user_total > 0):
+            if prev_player.user_total is not None:
+                if prev_player.user_total > 0:
                     row = {
                         'round_number': prev_player.round_number,
                         'Ints_sum': prev_player.solution,
@@ -118,18 +118,12 @@ class Results(Page):
         return {
             'table_rows': table_rows,
             'total_payoff': round(total_payoff),
-            'task_1_score':self.participant.vars['task_1_score']
+            'task_1_score': self.participant.vars['task_1_score']
         }
 
-        # def before_next_page(self):
-        #     self.participant.vars['start_time'] = None
-
-
 page_sequence = [
-    start,
-    task,
+    Intro,
+    SumTask,
     ResultsWaitPage,
     Results
 ]
-
-
