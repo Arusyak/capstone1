@@ -128,12 +128,12 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect()
     )
 
-    q_GPA_highschool = models.CharField(
+    q_GPA_highschool = models.FloatField(
         verbose_name="What was your final GPA in high school?",
         doc="""GPA real""",
     )
 
-    q_GPA_highschool_max = models.CharField(
+    q_GPA_highschool_max = models.FloatField(
         verbose_name='',
         doc="""GPA max"""
     )
@@ -150,7 +150,7 @@ class Player(BasePlayer):
 
     # how to input checkboxes.
     # https://groups.google.com/forum/#!searchin/otree/checkbox%7Csort:date/otree/CLmiH595UDM/LrItGoXvAAAJ
-    q_expectedstudytrack_AH = models.CharField(
+    q_expectedstudytrack_AH = models.BooleanField(
         initial=None,
         # choices = [
         #      0,1
@@ -160,7 +160,7 @@ class Player(BasePlayer):
         widget=django_widgets.CheckboxInput()
     )
 
-    q_expectedstudytrack_EG = models.CharField(
+    q_expectedstudytrack_EG = models.BooleanField(
         initial=None,
         # choices = [
         #     0,1],
@@ -169,7 +169,7 @@ class Player(BasePlayer):
         widget=django_widgets.CheckboxInput()
     )
 
-    q_expectedstudytrack_MD = models.CharField(
+    q_expectedstudytrack_MD = models.BooleanField(
         initial=None,
         # choices = [
         #   0, 1],
@@ -178,7 +178,7 @@ class Player(BasePlayer):
         widget=django_widgets.CheckboxInput()
     )
 
-    q_expectedstudytrack_SC = models.CharField(
+    q_expectedstudytrack_SC = models.BooleanField(
         initial=None,
         # choices=[
         #     0, 1],
@@ -187,7 +187,7 @@ class Player(BasePlayer):
         widget=django_widgets.CheckboxInput()
     )
 
-    q_expectedstudytrack_SS = models.CharField(
+    q_expectedstudytrack_SS = models.BooleanField(
         initial=None,
         # choices=[
         #     0, 1],
