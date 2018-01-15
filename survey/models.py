@@ -192,7 +192,6 @@ class Player(BasePlayer):
         # choices=[
         #     0, 1],
         verbose_name='Social Science',
-        help_text="Socialsdfsd",
         doc='Social Science expected',
         widget=django_widgets.CheckboxInput()
     )

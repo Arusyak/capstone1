@@ -88,8 +88,8 @@ class HoldOn(Page):
             self.participant.vars['task_4_payment'] = "Task 3"
             self.participant.vars['final_task_earnings'] = int(task_3_final_score) * 5
 
-        self.participant.vars['final_earnings'] = self.participant.vars['final_task_earnings'] + Constants.showup_Fee
-        # self.participant.vars['risk_aversion_score']
+        self.participant.vars['final_earnings'] = self.participant.vars['final_task_earnings'] + Constants.showup_Fee + \
+                                                  self.participant.vars['risk_aversion_score']
 
         # #######################################################################################
         # ######### save to data structures @####################################################
@@ -103,6 +103,8 @@ class HoldOn(Page):
         self.player.payment_method_selection = payment_method_selection
         self.player.task_3_score = task_3_score
         self.player.task_3_final_score = task_3_final_score
+
+        #self.player.risk_aversion_score = self.participant.vars['risk_aversion_score']
 
         self.player.task_4_payment = self.participant.vars['task_4_payment']
         self.player.final_task_earnings = self.participant.vars['final_task_earnings']
@@ -136,7 +138,7 @@ class HoldOn(Page):
             'task_3_score_4X_2': self.player.task_3_score * 4,
             'task_3_final_score_2': self.player.task_3_final_score,
 
-            # 'risk_aversion_score': risk_aversion_score,
+            'risk_aversion_score': self.player.risk_aversion_score,
 
             'task_4_payment': self.participant.vars['task_4_payment'],
             'final_task_earnings': self.participant.vars['final_task_earnings'],
@@ -165,11 +167,10 @@ class RiskAversion(Page):
 class RiskPreference(Page):
     form_model = models.Player
     form_fields = ['q_riskpreference']
-
-    def vars_for_template(self):
-        return {
-            "risk aversion result": self.player.risk_aversion_score()
-        }
+    # def vars_for_template(self):
+    #     return {
+    #         "risk aversion score": self.player.risk_aversion_score()
+    #     }
 
 
 class MathLevel(Page):
@@ -177,7 +178,7 @@ class MathLevel(Page):
     form_fields = ['q_mathplacement', 'q_mathlevel', 'q_GPA_highschool', 'q_GPA_highschool_max']
 
     def error_message(self, values):
-        if values ['q_GPA_highschool'] != str and values['q_GPA_highschool_max'] != str:
+        if values['q_GPA_highschool'] != str and values['q_GPA_highschool_max'] != str:
             if values['q_GPA_highschool'] > values['q_GPA_highschool_max']:
                 return 'Your GPA must not exceed the maximum possible GPA.'
         elif values['q_GPA_highschool'] == str:
@@ -311,10 +312,7 @@ class Statements2(Page):
 
 
 class Results(Page):
-    def vars_for_template(self):
-        return {
-            "risk aversion result": self.player.risk_aversion_score()
-        }
+    pass
 
 
 class PaymentInfo(Page):
@@ -327,15 +325,13 @@ class PaymentInfo(Page):
             'op_top_score': self.player.op_top_score,
             'task_2_score': self.player.task_2_score,
             'task_2_final_score': self.player.task_2_final_score,
-            # 't2_result_print': self.participant.vars['t2_result_print'],
 
             'payment_method_selection': self.participant.vars['payment_method_selection'],
             'task_3_score': self.player.task_3_score,
             'task_3_score_4X': self.player.task_3_score * 4,
             'task_3_final_score': self.player.task_3_final_score,
-            # 't3_result_print': self.participant.vars['t3_result_print'],
 
-            # 'risk_aversion_score': self.participant.vars['risk_aversion_score'],
+            'risk_aversion_score': self.player.risk_aversion_score,
 
             'task_4_payment': self.participant.vars['task_4_payment'],
             'final_task_earnings': self.participant.vars['final_task_earnings'],
