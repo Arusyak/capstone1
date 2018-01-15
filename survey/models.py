@@ -13,6 +13,7 @@ Your app description
 
 
 class Constants(BaseConstants):
+    showup_Fee = 30
     name_in_url = 'survey'
     players_per_group = None
     num_rounds = 1
@@ -47,7 +48,14 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    pass
+
+    def before_session_starts(self):
+        for p in self.get_players():
+            p.payoff = 0
+            if 'showupfee' in self.session.config:
+                p.showupfee = self.session.config['showupfee']
+            else:
+                p.showupfee = Constants.showup_Fee
 
 
 class Group(BaseGroup):
@@ -82,16 +90,14 @@ class Player(BasePlayer):
 
     def risk_aversion_score(self):
         x = random.randint(0, 1)
-        if self.q_riskaversion is None:
-            return 0
-        else:
-            return {
-                '8 AED for certain': [8, 8],
-                '12 AED or 6 AED with a 50% chance': [12, 6],
-                '16 AED or 4 AED with a 50% chance': [16, 4],
-                '20 AED or 2 AED with a 50% chance': [20, 2],
-                '24 AED or 0 AED with a 50% chance': [24, 0]
-            }[self.q_riskaversion][x]
+        return {
+            None: [0,0],
+            '8 AED for certain': [8, 8],
+            '12 AED or 6 AED with a 50% chance': [12, 6],
+            '16 AED or 4 AED with a 50% chance': [16, 4],
+            '20 AED or 2 AED with a 50% chance': [20, 2],
+            '24 AED or 0 AED with a 50% chance': [24, 0]
+        }[self.q_riskaversion][x]
 
     q_riskpreference = models.CharField(
         initial=None,
@@ -102,23 +108,29 @@ class Player(BasePlayer):
 
     def vars_for_template(self):
         return {
-            "risk_aversion_score": self.q_riskaversion
+            "risk_aversion_score": self.risk_aversion_score()
         }
+
+    q_mathplacement = models.CharField(
+        initial=None,
+        choices=['Mathematical Functions', 'Introduction to Vector Mathematics', 'Calculus', 'Multivariable Calculus'],
+        verbose_name='',
+        doc='Which course were you placed based on Math Assessment test?',
+        widget=widgets.RadioSelect()
+    )
 
     q_mathlevel = models.CharField(
         initial=None,
         choices=[
-            'Pre-Calculus', 'Calculus', 'Mutivariable calculus', 'Beyond multivariable calculus'
-        ],
+            'Pre-Calculus', 'Calculus', 'Mutivariable calculus', 'Beyond multivariable calculus'],
         verbose_name='',
         doc='What is the highest mathematics level you have taken thus far?',
-        widget=widgets.RadioSelect())
+        widget=widgets.RadioSelect()
+    )
 
     q_GPA_highschool = models.CharField(
         verbose_name="What was your final GPA in high school?",
         doc="""GPA real""",
-        max_length=5
-
     )
 
     q_GPA_highschool_max = models.CharField(
@@ -273,6 +285,42 @@ class Player(BasePlayer):
         verbose_name='',
         doc="Please rank your family's wealth based on your home country's standards",
         widget=widgets.RadioSelect())
+
+    def set_payoff(self):
+        """Calculate payoff, which is zero for the survey"""
+        self.payoff = 0
+
+    task_1_score = models.PositiveIntegerField(
+        doc='subject score in task 1')
+
+    task_2_score = models.PositiveIntegerField(
+        doc='subject score on task 2, num task correct')
+    op_scores = models.CharField(
+        doc='this subjects opposing player scores from task 2. also used in task 3')
+    op_top_score = models.PositiveIntegerField(
+        doc='the top score this player faced')
+    task_2_final_score = models.PositiveIntegerField(
+        doc='subject final score, after comparision')
+
+    payment_method_selection = models.CharField(
+        doc='subjects payment method selection, individual or comparision')
+    task_3_score = models.PositiveIntegerField(
+        doc='subject score on task 3, num tasks correct')
+    task_3_final_score = models.PositiveIntegerField(
+        doc='subjects final score on task 3. if subject chose comparison, score after . otherwise individual score')
+
+    task_4_payment = models.CharField(
+        doc='the task randomly selected for payment. task 1, 2 or 3')
+    final_task_earnings = models.FloatField(
+        doc='earnings from the task randomly selected, before showup fee and risk aversion score')
+
+    risk_aversion_payment = models.PositiveIntegerField(
+        doc='the risk aversion score from survey')
+
+    showup_Fee = models.FloatField(
+        doc='showup fee')
+    final_earnings = models.FloatField(
+        doc='final earnings, in currency. including task earnings and showup fee, before charity')
 
 
 for key in Constants.ChoiceTable:

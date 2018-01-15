@@ -1,0 +1,43 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load i18n %}
+
+{% block title %}
+Review of Task Performance and Final Result
+{% endblock %}
+
+{% block styles %}
+    <style type="text/css">
+        .radio-inline {
+            margin-right: 70px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <div class="panel panel-success">
+
+        <div class="panel-heading">
+            <h3>Final Score and Allowances</h3>
+            <hr>
+            <h4>We will now select at random one of the three tasks to pay you as allowance.</h4>
+            <ul>
+                <il><h4>Your score in task 1 is: {{ task_1_score }} </h4></il>
+               <il><h4>Your final score for task 2 is: {{ task_2_final_score }}</h4></il>
+               <il><h4>Your final score for task 3 is: {{ task_3_final_score }}</h4></il>
+            </ul>
+            <h4>Points are converted into AED at a rate of 1 point = 5 AED</h4>
+            <hr>
+            <h4>The program has randomly selected {{ task_4_payment }}. </h4>
+            <h4>Your allowance for this task is {{final_task_earnings}} AED. </h4>
+            <hr>
+            <h4>Your earnings from risk aversion are: {{ riskaversion_score }}</h4>
+            <h4>We add to your allowance a showup-allowance of {{ showup_Fee }} AED.</h4>
+            <h4><b><u>Your final allowance is {{ final_earnings }} AED.</u></b></h4>
+        </div>
+    </div>
+
+{% next_button %}   <br>   <br>   <br>
+
+{% endblock %}

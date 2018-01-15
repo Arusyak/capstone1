@@ -1,0 +1,33 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load i18n %}
+
+{% block title %}
+	Wait...
+{% endblock %}
+
+
+{% block content %}
+
+<div class="instructions well well-lg">
+
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'global/matrix.css' %}"/>
+
+
+    <p><br>
+      <h2> Please wait</h2>
+       </p>
+
+
+
+
+
+</div>
+
+    {% if debug %}
+      In debug mode only, 
+      {% next_button %}<br><br><br>
+    {% endif %}
+
+{% endblock %}

@@ -18,16 +18,20 @@
 {% endblock %}
 
 {% block content %}
+    <h4>
+    Which course were you placed based on your Math Assessment test held during Marhaba?
+    </h4>
 
+    {% formfield player.q_mathplacement %}
 
     <h4>
 What is the highest level of mathematics you have taken thus far?
     </h4>
 
-{% formfield player.q_mathlevel %}
+    {% formfield player.q_mathlevel %}
 
 
-{% formfield player.q_GPA_highschool width='50%' %} out of {% formfield player.q_GPA_highschool_max width='50%' %}
+    {% formfield player.q_GPA_highschool %} out of {% formfield player.q_GPA_highschool_max %}
 
  
 {% next_button %}   <br>   <br>   <br>
