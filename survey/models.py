@@ -99,6 +99,11 @@ class Player(BasePlayer):
             '24 AED or 0 AED with a 50% chance': [24, 0]
         }[self.q_riskaversion][x]
 
+    # def vars_for_template(self):
+    #     return{
+    #         "risk_aversion_score": self.risk_aversion_score()
+    #     }
+
     q_riskpreference = models.CharField(
         initial=None,
         choices=['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
@@ -106,10 +111,10 @@ class Player(BasePlayer):
         doc='Are you generally a person who is fully prepared to take risks or do you try to avoid taking risks?',
         widget=widgets.RadioSelect())
 
-    def vars_for_template(self):
-        return {
-            "risk_aversion_score": self.risk_aversion_score()
-        }
+    # def vars_for_template(self):
+    #     return {
+    #         "risk_aversion_score": self.risk_aversion_score()
+    #     }
 
     q_mathplacement = models.CharField(
         initial=None,
