@@ -333,6 +333,40 @@ class Group(BaseGroup):
 
             PLAYER.participant.vars['task_3_score'] = total_payoff
 
+        for PLAYER in self.get_players():
+            if 'task_2_op_scores' in PLAYER.participant.vars:
+                op_scores = PLAYER.participant.vars['task_2_op_scores']
+            else:
+                op_scores = [1, 2, 3]
+            top_score = max(op_scores)  # find top score
+
+        max_score_counter = 0
+        top_ids = []
+        winner_id_3 = 0
+
+        for PLAYER in self.get_players():
+            if int(PLAYER.participant.vars['task_2_score']) == top_score:
+                max_score_counter = max_score_counter + 1
+                top_ids.append(PLAYER.id_in_group)
+            if int(PLAYER.participant.vars['task_3_score']) == top_score and PLAYER.id_in_group not in top_ids:
+                top_ids.append(PLAYER.id_in_group)
+
+        winner_id_3 = random.choice(top_ids)
+
+        for PLAYER in self.get_players():
+            if PLAYER.participant.vars['task_3_score'] == top_score:
+                if PLAYER.id_in_group == winner_id_3:
+                    task_3_cp_score = PLAYER.participant.vars['task_3_score'] * 4
+                else:
+                    task_3_cp_score = 0
+            elif PLAYER.participant.vars['task_3_score'] > top_score:
+                task_3_cp_score = PLAYER.participant.vars['task_3_score'] * 4
+            else:
+                task_3_cp_score = 0
+
+            PLAYER.participant.vars['task_3_cp_score'] = task_3_cp_score
+            PLAYER.participant.vars['winner_id_3'] = winner_id_3
+
 
 class Player(BasePlayer):
 

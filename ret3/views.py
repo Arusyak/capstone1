@@ -10,6 +10,9 @@ import random
 
 
 class Intro(Page):
+    form_model = models.Player
+    form_fields = ['task_payment_choose']
+
     def is_displayed(self):
         if self.round_number == 1:
             self.participant.vars['start_time'] = None
@@ -108,7 +111,7 @@ class Results(Page):
         for prev_player in self.player.in_all_rounds():
             if prev_player.task_payment_choose is not None:
                 payment_method_selection = prev_player.task_payment_choose
-            if prev_player.task_payment_choose == None:
+            if payment_method_selection == None:
                 payment_method_selection = "no input (compared scoring)"
         self.participant.vars['payment_method_selection'] = payment_method_selection
 
@@ -121,39 +124,7 @@ class Results(Page):
 
         top_score = max(op_scores)  # find top score
 
-        # calc final score "compared payment" method
-        # from "task_3_final_score" from "task_3_score" and "op_scores"
-        if self.participant.vars['task_3_score'] > top_score:
-            result_print = "You have the top score."
-            self.participant.vars['task_3_cp_score'] = 4 * self.participant.vars['task_3_score']
-        elif self.participant.vars['task_3_score'] == top_score:
-
-            # get list of all score
-            z = copy.copy(op_scores)
-            z.append(self.participant.vars['task_3_score'])
-
-            # count number of top scores
-            cnt = 0
-            for i in z:
-                if i == top_score:
-                    cnt += 1
-            # roll a cnt sided die (there are at least two)
-            if random.uniform(0, 1) <= 1 / cnt:
-                result_print = "You are tied for the top score. Including you, there were " + str(
-                    cnt) + "players with the top score. The winner was chosen randomly among the top scorers. Good " \
-                           "news, you won! "
-                self.participant.vars['task_3_cp_score'] = 4 * self.participant.vars['task_3_score']
-            else:
-                result_print = "You are tied for the top score. Including you, there were " + str(
-                    cnt) + "players with the top score. The winner was chosen randomly among the top scorers. Sorry, " \
-                           "you didn't win. "
-                self.participant.vars['task_3_cp_score'] = 0
-
-        else:
-            result_print = "You do not have the top score."
-            self.participant.vars['task_3_cp_score'] = 0
-
-        if ("compared" in payment_method_selection) | (payment_method_selection == "no input (compared scoring)"):
+        if ("compared performance" in payment_method_selection) | (payment_method_selection == "no input (compared scoring)"):
             self.participant.vars['task_3_final_score'] = self.participant.vars['task_3_cp_score']  # compared scoring
         else:
             self.participant.vars['task_3_final_score'] = self.participant.vars['task_3_score']  # other kind of scoring
@@ -183,8 +154,8 @@ class Results(Page):
             'top_score': round(top_score),
             'task_3_cp_score': round(self.participant.vars['task_3_cp_score']),
             'final_score': round(self.participant.vars['task_3_final_score']),
-            'result_print': result_print,
             'payment_method_selection': payment_method_selection,
+            'winner_id_3': self.participant.vars['winner_id_3']
         }
 
 
