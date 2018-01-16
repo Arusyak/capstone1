@@ -123,8 +123,9 @@ class Results(Page):
             'debug': settings.DEBUG,
             'table_rows': table_rows,
             'task_2_score': self.participant.vars['task_2_score'],
-            # 'task_2_op_scores': self.participant.vars['task_2_op_scores'],
-            # 'task_2_final_score': self.participant.vars['task_2_final_score'],
+         #   'task_2_op_scores': self.participant.vars['task_2_op_scores'],
+            'task_2_final_score': self.participant.vars['task_2_final_score'],
+            'winner_id': self.participant.vars['winner_id']
         }
 
         # def before_next_page(self):
