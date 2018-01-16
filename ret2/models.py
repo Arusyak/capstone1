@@ -383,15 +383,16 @@ class Group(BaseGroup):
 
         top_score = max(all_scores)
         max_score_counter = 0
-        winner_id = 0
+        # winner_id = 0
         top_ids = []
         for PLAYER in self.get_players():
             if int(PLAYER.participant.vars['task_2_score']) == top_score:
                 max_score_counter = max_score_counter + 1
                 top_ids.append(PLAYER.id_in_group)
-                winner_id = random.choice(top_ids)
-            PLAYER.participant.vars['winner_id'] = winner_id
 
+        winner_id = random.choice(top_ids)
+
+        for PLAYER in self.get_players():
             if max_score_counter > 1:
                 task_2_final_score = 25
                 if int(PLAYER.participant.vars['task_2_score']) == top_score:
@@ -399,12 +400,15 @@ class Group(BaseGroup):
                         task_2_final_score = 4 * PLAYER.participant.vars['task_2_score']
                     else:
                         task_2_final_score = 0
+                else:
+                    task_2_final_score = 0
             elif int(PLAYER.participant.vars['task_2_score']) == top_score:
                 task_2_final_score = 4 * PLAYER.participant.vars['task_2_score']
             else:
                 task_2_final_score = 0
 
             PLAYER.participant.vars['task_2_final_score'] = task_2_final_score
+            PLAYER.participant.vars['winner_id'] = winner_id
 
 
 class Player(BasePlayer):
