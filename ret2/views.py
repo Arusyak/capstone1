@@ -103,6 +103,15 @@ class Results(Page):
             if p.payoff_score is not None:
                 total_payoff += p.payoff_score
 
+            # get other player's scores
+            op_scores = []
+
+            # loop over scores
+            for op in self.player.get_others_in_group():
+                op_scores.append(int(op.participant.vars['task_2_score']))
+
+            self.participant.vars['task_2_op_scores'] = op_scores  # save other player scores for score task3
+
         # only keep obs if YourEntry player_sum, is not None.
         table_rows = []
         for prev_player in self.player.in_all_rounds():
