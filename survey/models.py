@@ -91,7 +91,6 @@ class Player(BasePlayer):
     def risk_aversion_score(self):
         x = random.randint(0, 1)
         return {
-            None: [0,0],
             '8 AED for certain': [8, 8],
             '12 AED or 6 AED with a 50% chance': [12, 6],
             '16 AED or 4 AED with a 50% chance': [16, 4],
@@ -99,10 +98,8 @@ class Player(BasePlayer):
             '24 AED or 0 AED with a 50% chance': [24, 0]
         }[self.q_riskaversion][x]
 
-    # def vars_for_template(self):
-    #     return{
-    #         "risk_aversion_score": self.risk_aversion_score()
-    #     }
+    def vars_for_template(self):
+        self.participant.vars['risk_aversion_score'] = self.risk_aversion_score()
 
     q_riskpreference = models.CharField(
         initial=None,

@@ -29,7 +29,7 @@ class RiskPreference(Page):
 
     def vars_for_template(self):
         return {
-            'risk_aversion_score':self.player.risk_aversion_score()
+            'risk_aversion_score': self.player.risk_aversion_score()
         }
 
 
@@ -172,10 +172,11 @@ class Statements2(Page):
 
 
 class Results(Page):
-    def vars_for_template(self):
-        return {
-            'risk_aversion_score':self.player.risk_aversion_score()
-        }
+    pass
+    # def vars_for_template(self):
+    #     return {
+    #         'risk_aversion_score':self.player.risk_aversion_score()
+    #     }
 
 
 class HoldOn(Page):
@@ -253,7 +254,8 @@ class HoldOn(Page):
             self.participant.vars['task_4_payment'] = "Task 3"
             self.participant.vars['final_task_earnings'] = int(task_3_final_score) * 5
 
-        self.participant.vars['final_earnings'] = self.participant.vars['final_task_earnings'] + Constants.showup_Fee + risk_aversion_score
+        self.participant.vars['final_earnings'] = self.participant.vars['final_task_earnings'] + Constants.showup_Fee \
+                                                  + self.participant.vars['risk_aversion_score']
 
         # #######################################################################################
         # ######### save to data structures @####################################################
@@ -334,7 +336,7 @@ class PaymentInfo(Page):
             'task_3_score_4X': self.player.task_3_score * 4,
             'task_3_final_score': self.player.task_3_final_score,
 
-            'risk_aversion_score': self.participant.vars['risk_aversion_score'],
+            'risk_aversion_score': self.player.risk_aversion_score(),
 
             'task_4_payment': self.participant.vars['task_4_payment'],
             'final_task_earnings': self.participant.vars['final_task_earnings'],
