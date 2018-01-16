@@ -377,32 +377,34 @@ class Group(BaseGroup):
 
             PLAYER.participant.vars['task_2_score'] = total_payoff
 
+    def set_task_score(self):
         all_scores = []
         for PLAYER in self.get_players():
             all_scores.append(int(PLAYER.participant.vars['task_2_score']))
 
+        op_scores = []
+        for op in self.player.get_others_in_group():
+            op_scores.append(int(op.participant.vars['task_2_score']))
+            self.participant.vars['task_2_op_scores'] = op_scores
+
         top_score = max(all_scores)
         max_score_counter = 0
-        winner_id = 0
-        top_ids = []
         for PLAYER in self.get_players():
             if int(PLAYER.participant.vars['task_2_score']) == top_score:
                 max_score_counter = max_score_counter + 1
-                top_ids.append(PLAYER.id_in_group)
-                winner_id = random.choice(top_ids)
-            PLAYER.participant.vars['winner_id'] = winner_id
 
+        for PLAYER in self.get_players():
             if max_score_counter > 1:
-                task_2_final_score = 25
-                if int(PLAYER.participant.vars['task_2_score']) == top_score:
-                    if PLAYER.id_in_group == winner_id:
-                        task_2_final_score = 4 * PLAYER.participant.vars['task_2_score']
+                if self.task_2_score == op.task_2_score == top_score:
+                    if PLAYER.id_in_group > op.id_in_group:
+                        task_2_final_score = 4 * self.task_2_score
                     else:
                         task_2_final_score = 0
-            elif int(PLAYER.participant.vars['task_2_score']) == top_score:
-                task_2_final_score = 4 * PLAYER.participant.vars['task_2_score']
             else:
-                task_2_final_score = 0
+                if self.task_2_score == top_score:
+                    task_2_final_score = 4 * self.task_2_score
+                else:
+                    task_2_final_score = 0
 
             PLAYER.participant.vars['task_2_final_score'] = task_2_final_score
 
@@ -416,12 +418,6 @@ class Player(BasePlayer):
         else:
             self.is_correct = False
             self.payoff_score = c(0)
-
-    def set_task_score(self):
-        op_scores = []
-        for op in self.get_others_in_group():
-            op_scores.append(int(op.participant.vars['task_2_score']))
-        self.participant.vars['task_2_op_scores'] = op_scores
 
     task_timer = models.PositiveIntegerField(
         doc="""The length of the real effort task timer."""
