@@ -27,11 +27,6 @@ class RiskPreference(Page):
     form_model = models.Player
     form_fields = ['q_riskpreference']
 
-    def vars_for_template(self):
-        return {
-            'risk_aversion_score': self.player.risk_aversion_score()
-        }
-
 
 class MathLevel(Page):
     form_model = models.Player
@@ -174,8 +169,9 @@ class Statements2(Page):
 class Results(Page):
     pass
     # def vars_for_template(self):
+    #     self.participant.vars['risk_aversion_score'] = self.player.risk_aversion_score()
     #     return {
-    #         'risk_aversion_score':self.player.risk_aversion_score()
+    #         'risk_aversion_score': self.player.risk_aversion_score()
     #     }
 
 
@@ -184,6 +180,7 @@ class HoldOn(Page):
         return self.round_number == 1
 
     def vars_for_template(self):
+        self.participant.vars['risk_aversion_score'] = self.player.risk_aversion_score()
 
         # ############ task 1 #####################################################################################
         #  retrieve task 1 score
@@ -270,7 +267,7 @@ class HoldOn(Page):
         self.player.task_3_score = task_3_score
         self.player.task_3_final_score = task_3_final_score
 
-        self.player.risk_aversion_score = risk_aversion_score
+        self.player.risk_aversion_score = self.participant.vars['risk_aversion_score']
 
         self.player.task_4_payment = self.participant.vars['task_4_payment']
         self.player.final_task_earnings = self.participant.vars['final_task_earnings']
@@ -304,7 +301,7 @@ class HoldOn(Page):
             'task_3_score_4X_2': self.player.task_3_score * 4,
             'task_3_final_score_2': self.player.task_3_final_score,
 
-            'risk_aversion_score': self.player.risk_aversion_score,
+            'risk_aversion_score': self.participant.vars['risk_aversion_score'],
 
             'task_4_payment': self.participant.vars['task_4_payment'],
             'final_task_earnings': self.participant.vars['final_task_earnings'],
@@ -336,7 +333,7 @@ class PaymentInfo(Page):
             'task_3_score_4X': self.player.task_3_score * 4,
             'task_3_final_score': self.player.task_3_final_score,
 
-            'risk_aversion_score': self.player.risk_aversion_score(),
+            'risk_aversion_score': self.participant.vars['risk_aversion_score'],
 
             'task_4_payment': self.participant.vars['task_4_payment'],
             'final_task_earnings': self.participant.vars['final_task_earnings'],
