@@ -149,7 +149,7 @@ SESSION_CONFIGS = [
     {
         'name': 'survey',
         'display_name': "Survey",
-        'num_demo_participants': 1,
+        'num_demo_participants': 4,
         'app_sequence': [
             'survey',
         ],

@@ -15,7 +15,7 @@ Your app description
 class Constants(BaseConstants):
     showup_Fee = 30
     name_in_url = 'survey'
-    players_per_group = None
+    players_per_group = 4
     num_rounds = 1
 
     ChoiceTable = {
@@ -59,7 +59,43 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
-    pass
+    def identify_payment(self):
+        task_choice = random.uniform(0, 1)
+
+        for PLAYER in self.get_players():
+            # ############ task 1 #####################################################################################
+            #  retrieve task 1 score
+            if 'task_1_score' in PLAYER.participant.vars:  # just error handling
+                task_1_score = PLAYER.participant.vars['task_1_score']
+            else:
+                task_1_score = 6901
+
+            # #############################################################################################
+            # ############ task 2 #########################################################################
+
+            # retrieve task 2 final score
+            # final may differn from initial, since we need to break tie breakers.
+            if 'task_2_final_score' in PLAYER.participant.vars:  # just error handling
+                task_2_final_score = PLAYER.participant.vars['task_2_final_score']
+            else:
+                task_2_final_score = 6902
+
+            # ############ task 3 #########################################################################
+
+            if 'task_3_final_score' in PLAYER.participant.vars:  # just error handling
+                task_3_final_score = PLAYER.participant.vars['task_3_final_score']
+            else:
+                task_3_final_score = 6903
+
+            if task_choice <= 1 / 3:
+                PLAYER.participant.vars['task_4_payment'] = "Task 1"
+                PLAYER.participant.vars['final_task_earnings'] = task_1_score * 5
+            elif 2 / 3 >= task_choice > 1/3:
+                PLAYER.participant.vars['task_4_payment'] = "Task 2"
+                PLAYER.participant.vars['final_task_earnings'] = task_2_final_score * 5
+            else:
+                PLAYER.participant.vars['task_4_payment'] = "Task 3"
+                PLAYER.participant.vars['final_task_earnings'] = task_3_final_score * 5
 
 
 class Player(BasePlayer):

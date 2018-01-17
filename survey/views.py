@@ -10,7 +10,7 @@ from .models import Constants
 
 class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
-        pass
+        self.group.identify_payment()
 
 
 class Rank(Page):
@@ -239,18 +239,6 @@ class HoldOn(Page):
         else:
             risk_aversion_score = 6904
 
-        # #######################################################################################
-        # ####### select a task randomly for payment ############################################
-        if random.uniform(0, 1) <= 1 / 3:
-            self.participant.vars['task_4_payment'] = "Task 1"
-            self.participant.vars['final_task_earnings'] = int(task_1_score) * 5
-        elif random.uniform(0, 1) <= 1 / 2:
-            self.participant.vars['task_4_payment'] = "Task 2"
-            self.participant.vars['final_task_earnings'] = int(task_2_final_score) * 5
-        else:
-            self.participant.vars['task_4_payment'] = "Task 3"
-            self.participant.vars['final_task_earnings'] = int(task_3_final_score) * 5
-
         self.participant.vars['final_earnings'] = self.participant.vars['final_task_earnings'] + Constants.showup_Fee \
                                                   + self.participant.vars['risk_aversion_score']
 
@@ -273,6 +261,8 @@ class HoldOn(Page):
         self.player.final_task_earnings = self.participant.vars['final_task_earnings']
         self.player.showup_Fee = Constants.showup_Fee
         self.player.final_earnings = self.participant.vars['final_earnings']
+
+        self.participant.payoff = self.player.final_earnings
 
         ########################################################################################
 
