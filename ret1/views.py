@@ -7,6 +7,14 @@ import time
 import random
 
 
+class BeginningWaitPage(WaitPage):
+    def is_displayed(self):
+        return self.round_number == 1
+
+    def after_all_players_arrive(self):
+        pass
+
+
 class Intro(Page):
     def is_displayed(self):
         return self.round_number == 1
@@ -86,6 +94,14 @@ class ResultsWaitPage(WaitPage):
         pass
 
 
+class HoldOn(WaitPage):
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds
+
+    def after_all_players_arrive(self):
+        pass
+
+
 class Results(Page):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
@@ -121,9 +137,12 @@ class Results(Page):
             'task_1_score': self.participant.vars['task_1_score']
         }
 
+
 page_sequence = [
+    BeginningWaitPage,
     Intro,
     SumTask,
     ResultsWaitPage,
-    Results
+    Results,
+    HoldOn
 ]

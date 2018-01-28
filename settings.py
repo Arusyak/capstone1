@@ -98,7 +98,7 @@ mturk_hit_settings = {
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = {
-    'real_world_currency_per_point': 3.000,
+    'real_world_currency_per_point': 1.000,
     'participation_fee': 0.00,
     'doc': "otree real effort task",
     'mturk_hit_settings': mturk_hit_settings,
@@ -113,7 +113,7 @@ SESSION_CONFIGS = [
         'app_sequence': [
             'intro', 'ret1', 'ret2', 'ret3', 'survey'
         ],
-        'ret_timer': 60,
+        'ret_timer': 300,
         'showupfee': 30,
     },
     {
@@ -143,7 +143,7 @@ SESSION_CONFIGS = [
         'app_sequence': [
             'ret2', 'ret3', 'survey'
         ],
-        'ret_timer': 60,
+        'ret_timer': 300,
         'showupfee': 30,
     },
     {

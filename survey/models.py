@@ -304,8 +304,8 @@ class Player(BasePlayer):
             '...in the top 50-75%?',
             '...in the bottom 25%?'
         ],
-        verbose_name='Compared to other NYUAD students, do you think your mathematics abilitiy is...',
-        doc='Compared to other NYUAD students, do you think your mathematics abilitiy is...',
+        verbose_name='',
+        doc='Compared to other NYUAD students, do you think your mathematics ability is...',
         widget=widgets.RadioSelect())
 
     q_passinggrade = models.CharField(

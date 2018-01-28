@@ -13,6 +13,14 @@ class ResultsWaitPage(WaitPage):
         self.group.identify_payment()
 
 
+class BeginningWaitPage(WaitPage):
+    def is_displayed(self):
+        return self.round_number == 1
+
+    def after_all_players_arrive(self):
+        pass
+
+
 class Rank(Page):
     form_model = models.Player
     form_fields = ['q_rank']
@@ -166,15 +174,6 @@ class Statements2(Page):
         pass
 
 
-class Results(Page):
-    pass
-    # def vars_for_template(self):
-    #     self.participant.vars['risk_aversion_score'] = self.player.risk_aversion_score()
-    #     return {
-    #         'risk_aversion_score': self.player.risk_aversion_score()
-    #     }
-
-
 class HoldOn(Page):
     def is_displayed(self):
         return self.round_number == 1
@@ -262,7 +261,7 @@ class HoldOn(Page):
         self.player.showup_Fee = Constants.showup_Fee
         self.player.final_earnings = self.participant.vars['final_earnings']
 
-        self.participant.payoff = self.player.final_earnings
+        self.player.payoff = self.player.final_earnings
 
         ########################################################################################
 
@@ -335,7 +334,21 @@ class PaymentInfo(Page):
         }
 
 
+class BeforeFinalPage(WaitPage):
+    def is_displayed(self):
+        return self.round_number == 1
+
+    def after_all_players_arrive(self):
+        pass
+
+
+class FinalPage(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
+
 page_sequence = [
+    BeginningWaitPage,
     Rank,
     RiskAversion,
     RiskPreference,
@@ -351,7 +364,8 @@ page_sequence = [
     Statements1,
     Statements2,
     ResultsWaitPage,
-    Results,
     HoldOn,
-    PaymentInfo
+    PaymentInfo,
+    BeforeFinalPage,
+    FinalPage
 ]

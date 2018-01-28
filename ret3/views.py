@@ -9,6 +9,14 @@ import time
 import random
 
 
+class BeginningWaitPage(WaitPage):
+    def is_displayed(self):
+        return self.round_number == 1
+
+    def after_all_players_arrive(self):
+        pass
+
+
 class Intro(Page):
     form_model = models.Player
     form_fields = ['task_payment_choose']
@@ -159,4 +167,5 @@ class Results(Page):
         }
 
 
-page_sequence = [Intro, SumTask, ResultsWaitPage, Results]
+
+page_sequence = [BeginningWaitPage, Intro, SumTask, ResultsWaitPage, Results]

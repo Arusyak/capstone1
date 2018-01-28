@@ -9,6 +9,14 @@ import time
 import random
 
 
+class BeginningWaitPage(WaitPage):
+    def is_displayed(self):
+        return self.round_number == 1
+
+    def after_all_players_arrive(self):
+        pass
+
+
 class Intro(Page):
     def is_displayed(self):
         if self.round_number == 1:
@@ -137,13 +145,11 @@ class Results(Page):
             'winner_id': self.participant.vars['winner_id']
         }
 
-        # def before_next_page(self):
-        #     self.participant.vars['start_time'] = None
-
 
 page_sequence = [
+    BeginningWaitPage,
     Intro,
     SumTask,
     ResultsWaitPage,
-    Results
+    Results,
 ]
