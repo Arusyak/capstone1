@@ -140,9 +140,10 @@ class Results(Page):
             'debug': settings.DEBUG,
             'table_rows': table_rows,
             'task_2_score': self.participant.vars['task_2_score'],
-         #   'task_2_op_scores': self.participant.vars['task_2_op_scores'],
+            'task_2_op_scores': self.participant.vars['task_2_op_scores'],
             'task_2_final_score': self.participant.vars['task_2_final_score'],
-            'winner_id': self.participant.vars['winner_id']
+            'winner_id': self.participant.vars['winner_id'],
+            'top_ids': self.participant.vars['top_2_ids']
         }
 
 

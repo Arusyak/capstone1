@@ -116,19 +116,19 @@ class Results(Page):
 
         self.participant.vars['task_3_score'] = total_payoff
 
+        payment_method_selection = "no input (compared scoring)"
+
         for prev_player in self.player.in_all_rounds():
             if prev_player.task_payment_choose is not None:
                 payment_method_selection = prev_player.task_payment_choose
-            if payment_method_selection == None:
-                payment_method_selection = "no input (compared scoring)"
+                if payment_method_selection is "":
+                    payment_method_selection = "no input (compared scoring)"
+
         self.participant.vars['payment_method_selection'] = payment_method_selection
 
-        # retrive other player's scores from task 2
+        # retrieve other player's scores from task 2
         # just error handling, if op_scores are None, say in testing
-        if 'task_2_op_scores' in self.participant.vars:
-            op_scores = self.participant.vars['task_2_op_scores']
-        else:
-            op_scores = [1, 2, 3]
+        op_scores = self.participant.vars['task_2_op_scores']
 
         top_score = max(op_scores)  # find top score
 
@@ -163,9 +163,10 @@ class Results(Page):
             'task_3_cp_score': round(self.participant.vars['task_3_cp_score']),
             'final_score': round(self.participant.vars['task_3_final_score']),
             'payment_method_selection': payment_method_selection,
-            'winner_id_3': self.participant.vars['winner_id_3']
+            'winner_id_3': self.participant.vars['winner_id_3'],
+            'top_2_ids': self.participant.vars['top_2_ids'],
+            'top_3_ids': self.participant.vars['top_3_ids'],
         }
-
 
 
 page_sequence = [BeginningWaitPage, Intro, SumTask, ResultsWaitPage, Results]

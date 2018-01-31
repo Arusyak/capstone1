@@ -2,7 +2,6 @@
 # <standard imports>
 from __future__ import division
 
-import otree.models
 from otree.db import models
 from otree import widgets
 from otree.common import Currency as c, currency_range, safe_json
@@ -15,8 +14,6 @@ from otree.api import (
 )
 import random
 
-# </standard imports>
-
 author = 'Curtis Kephart (economicurtis@gmail.com)'
 
 doc = """
@@ -27,7 +24,7 @@ Real Effort Task. Add as many ints as possible.
 class Constants(BaseConstants):
     name_in_url = 'task_sum2'
     players_per_group = 4
-    task_timer = 300  # see Subsession, before_session_starts setting.
+    task_timer = 60  # see Subsession, before_session_starts setting.
     num_rounds = 60  # must be more than the max one person can do in task_timer seconds
 
     INTS_T3 = [
@@ -383,7 +380,7 @@ class Group(BaseGroup):
 
         top_score = max(all_scores)
         max_score_counter = 0
-        # winner_id = 0
+
         top_ids = []
         for PLAYER in self.get_players():
             if int(PLAYER.participant.vars['task_2_score']) == top_score:
@@ -394,7 +391,7 @@ class Group(BaseGroup):
 
         for PLAYER in self.get_players():
             if max_score_counter > 1:
-                task_2_final_score = 25
+                # task_2_final_score = 25
                 if int(PLAYER.participant.vars['task_2_score']) == top_score:
                     if PLAYER.id_in_group == winner_id:
                         task_2_final_score = 4 * PLAYER.participant.vars['task_2_score']
@@ -409,6 +406,8 @@ class Group(BaseGroup):
 
             PLAYER.participant.vars['task_2_final_score'] = task_2_final_score
             PLAYER.participant.vars['winner_id'] = winner_id
+            PLAYER.participant.vars['top_2_ids'] = top_ids
+            PLAYER.participant.vars['top_score'] = top_score
 
 
 class Player(BasePlayer):

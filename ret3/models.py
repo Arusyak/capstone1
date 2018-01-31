@@ -13,6 +13,7 @@ from otree.api import (
     Currency as c, currency_range
 )
 import random
+
 author = 'Curtis Kephart (economicurtis@gmail.com)'
 
 doc = """
@@ -23,7 +24,7 @@ Real Effort Task. Add as many ints as possible.
 class Constants(BaseConstants):
     name_in_url = 'task_sum3'
     players_per_group = 4
-    task_timer = 300  # see Subsession, before_session_starts setting.
+    task_timer = 60  # see Subsession, before_session_starts setting.
     num_rounds = 70  # must be more than the max one person can do in task_timer seconds
 
     INTS_T4 = [
@@ -231,7 +232,6 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-
     def before_session_starts(self):
         if 'task_timer' in self.session.config:
             task_timer = self.session.config['task_timer']
@@ -333,25 +333,25 @@ class Group(BaseGroup):
 
             PLAYER.participant.vars['task_3_score'] = total_payoff
 
+        op_scores = []
         for PLAYER in self.get_players():
-            if 'task_2_op_scores' in PLAYER.participant.vars:
-                op_scores = PLAYER.participant.vars['task_2_op_scores']
-            else:
-                op_scores = [1, 2, 3]
-            top_score = max(op_scores)  # find top score
+            op_scores = PLAYER.participant.vars['task_2_op_scores']
 
-        max_score_counter = 0
-        top_ids = []
+        top_score = max(op_scores)  # find top score
+        top_2_ids = []
+        top_3_ids = []
         winner_id_3 = 0
 
         for PLAYER in self.get_players():
-            if int(PLAYER.participant.vars['task_2_score']) == top_score:
-                max_score_counter = max_score_counter + 1
-                top_ids.append(PLAYER.id_in_group)
-            if int(PLAYER.participant.vars['task_3_score']) == top_score and PLAYER.id_in_group not in top_ids:
-                top_ids.append(PLAYER.id_in_group)
+            top_2_ids = PLAYER.participant.vars['top_2_ids']
 
-        winner_id_3 = random.choice(top_ids)
+        top_3_ids.extend(top_2_ids)
+
+        for PLAYER in self.get_players():
+            if int(PLAYER.participant.vars['task_3_score']) == top_score and PLAYER.id_in_group not in top_3_ids:
+                top_3_ids.append(PLAYER.id_in_group)
+
+        winner_id_3 = random.choice(top_3_ids)
 
         for PLAYER in self.get_players():
             if PLAYER.participant.vars['task_3_score'] == top_score:
@@ -366,10 +366,10 @@ class Group(BaseGroup):
 
             PLAYER.participant.vars['task_3_cp_score'] = task_3_cp_score
             PLAYER.participant.vars['winner_id_3'] = winner_id_3
+            PLAYER.participant.vars['top_3_ids'] = top_3_ids
 
 
 class Player(BasePlayer):
-
     def score_round(self):
         # update player payoffs
         if self.solution == self.user_total:
