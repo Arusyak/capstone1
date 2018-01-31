@@ -68,7 +68,7 @@ class Group(BaseGroup):
             if 'task_1_score' in PLAYER.participant.vars:  # just error handling
                 task_1_score = PLAYER.participant.vars['task_1_score']
             else:
-                task_1_score = 6901
+                task_1_score = 0
 
             # #############################################################################################
             # ############ task 2 #########################################################################
@@ -78,14 +78,14 @@ class Group(BaseGroup):
             if 'task_2_final_score' in PLAYER.participant.vars:  # just error handling
                 task_2_final_score = PLAYER.participant.vars['task_2_final_score']
             else:
-                task_2_final_score = 6902
+                task_2_final_score = 0
 
             # ############ task 3 #########################################################################
 
             if 'task_3_final_score' in PLAYER.participant.vars:  # just error handling
                 task_3_final_score = PLAYER.participant.vars['task_3_final_score']
             else:
-                task_3_final_score = 6903
+                task_3_final_score = 0
 
             if task_choice <= 1 / 3:
                 PLAYER.participant.vars['task_4_payment'] = "Task 1"

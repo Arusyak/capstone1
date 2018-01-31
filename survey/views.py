@@ -103,11 +103,27 @@ class GPAStudyTrack(Page):
                 + values['q_gpastudytrack_SC'] + values['q_gpastudytrack_SS'] != 15:
             return 'Please select each rank only once'
         if values['q_gpastudytrack_AH'] == values['q_gpastudytrack_EG'] == values['q_gpastudytrack_MD'] \
-                == values['q_gpastudytrack_SC'] == values['q_gpastudytrack_SS'] == 3:
+                == values['q_gpastudytrack_SC'] == values['q_gpastudytrack_SS']:
             return 'Please select each rank only once'
         if values['q_gpastudytrack_AH'] != 1 and values['q_gpastudytrack_EG'] != 1 \
                 and values['q_gpastudytrack_MD'] != 1 and values['q_gpastudytrack_SC'] != 1 \
                 and values['q_gpastudytrack_SS'] != 1:
+            return 'Please select each rank only once'
+        if values['q_gpastudytrack_AH'] != 2 and values['q_gpastudytrack_EG'] != 2 \
+                and values['q_gpastudytrack_MD'] != 2 and values['q_gpastudytrack_SC'] != 2 \
+                and values['q_gpastudytrack_SS'] != 2:
+            return 'Please select each rank only once'
+        if values['q_gpastudytrack_AH'] != 3 and values['q_gpastudytrack_EG'] != 3 \
+                and values['q_gpastudytrack_MD'] != 3 and values['q_gpastudytrack_SC'] != 3 \
+                and values['q_gpastudytrack_SS'] != 3:
+            return 'Please select each rank only once'
+        if values['q_gpastudytrack_AH'] != 4 and values['q_gpastudytrack_EG'] != 4 \
+                and values['q_gpastudytrack_MD'] != 4 and values['q_gpastudytrack_SC'] != 4 \
+                and values['q_gpastudytrack_SS'] != 4:
+            return 'Please select each rank only once'
+        if values['q_gpastudytrack_AH'] != 5 and values['q_gpastudytrack_EG'] != 5 \
+                and values['q_gpastudytrack_MD'] != 5 and values['q_gpastudytrack_SC'] != 5 \
+                and values['q_gpastudytrack_SS'] != 5:
             return 'Please select each rank only once'
 
 
@@ -131,6 +147,22 @@ class ProfitableStudyTrack(Page):
         if values['q_profitablestudytrack_AH'] != 1 and values['q_profitablestudytrack_EG'] != 1 \
                 and values['q_profitablestudytrack_MD'] != 1 and values['q_profitablestudytrack_SC'] != 1 \
                 and values['q_profitablestudytrack_SS'] != 1:
+            return 'Please select each rank only once'
+        if values['q_profitablestudytrack_AH'] != 2 and values['q_profitablestudytrack_EG'] != 2 \
+                and values['q_profitablestudytrack_MD'] != 2 and values['q_profitablestudytrack_SC'] != 2 \
+                and values['q_profitablestudytrack_SS'] != 2:
+            return 'Please select each rank only once'
+        if values['q_profitablestudytrack_AH'] != 3 and values['q_profitablestudytrack_EG'] != 3 \
+                and values['q_profitablestudytrack_MD'] != 3 and values['q_profitablestudytrack_SC'] != 3 \
+                and values['q_profitablestudytrack_SS'] != 3:
+            return 'Please select each rank only once'
+        if values['q_profitablestudytrack_AH'] != 4 and values['q_profitablestudytrack_EG'] != 4 \
+                and values['q_profitablestudytrack_MD'] != 4 and values['q_profitablestudytrack_SC'] != 4 \
+                and values['q_profitablestudytrack_SS'] != 4:
+            return 'Please select each rank only once'
+        if values['q_profitablestudytrack_AH'] != 5 and values['q_profitablestudytrack_EG'] != 5 \
+                and values['q_profitablestudytrack_MD'] != 5 and values['q_profitablestudytrack_SC'] != 5 \
+                and values['q_profitablestudytrack_SS'] != 5:
             return 'Please select each rank only once'
 
 
@@ -186,7 +218,7 @@ class HoldOn(Page):
         if 'task_1_score' in self.participant.vars:  # just error handling
             task_1_score = self.participant.vars['task_1_score']
         else:
-            task_1_score = 6901
+            task_1_score = 0
 
         # retrive other player's scores from task 2
         # just error handling, if op_scores are None, say in testing
@@ -202,14 +234,14 @@ class HoldOn(Page):
         if 'task_2_score' in self.participant.vars:  # just error handling
             task_2_score = self.participant.vars['task_2_score']
         else:
-            task_2_score = 6902
+            task_2_score = 0
 
         # retrieve task 2 final score
         # final may differn from initial, since we need to break tie breakers.
         if 'task_2_final_score' in self.participant.vars:  # just error handling
             task_2_final_score = self.participant.vars['task_2_final_score']
         else:
-            task_2_final_score = 6902
+            task_2_final_score = 0
 
         # ############ task 3 #########################################################################
 
@@ -224,22 +256,21 @@ class HoldOn(Page):
         if 'task_3_score' in self.participant.vars:  # just error handling
             task_3_score = self.participant.vars['task_3_score']
         else:
-            task_3_score = 6903
+            task_3_score = 0
 
         # retrieve task 3 final score
         # final may differn from initial, since we need to break tie breakers.
         if 'task_3_final_score' in self.participant.vars:  # just error handling
             task_3_final_score = self.participant.vars['task_3_final_score']
         else:
-            task_3_final_score = 6903
+            task_3_final_score = 0
 
         if 'risk_aversion_score' in self.participant.vars:
             risk_aversion_score = self.participant.vars['risk_aversion_score']
         else:
-            risk_aversion_score = 6904
+            risk_aversion_score = 0
 
-        self.participant.vars['final_earnings'] = self.participant.vars['final_task_earnings'] + Constants.showup_Fee \
-                                                  + self.participant.vars['risk_aversion_score']
+        self.participant.vars['final_earnings'] = self.participant.vars['final_task_earnings'] + Constants.showup_Fee + self.participant.vars['risk_aversion_score']
 
         # #######################################################################################
         # ######### save to data structures @####################################################
@@ -261,7 +292,7 @@ class HoldOn(Page):
         self.player.showup_Fee = Constants.showup_Fee
         self.player.final_earnings = self.participant.vars['final_earnings']
 
-        self.player.payoff = self.player.final_earnings
+        self.player.payoff = self.participant.vars['final_earnings']
 
         ########################################################################################
 
@@ -309,7 +340,6 @@ class HoldOn(Page):
 class PaymentInfo(Page):
     def vars_for_template(self):
         return {
-
             'task_1_score': self.player.task_1_score,
 
             'op_scores': self.player.op_scores,
@@ -328,6 +358,9 @@ class PaymentInfo(Page):
             'final_task_earnings': self.participant.vars['final_task_earnings'],
             'showup_Fee': Constants.showup_Fee,
             'final_earnings': self.participant.vars['final_earnings'],
+
+            # 'winner_id_3': self.participant.vars['winner_id_3'],
+            # 'top_3_ids': self.participant.vars['top_3_ids'],
 
             'debug': settings.DEBUG,
 
