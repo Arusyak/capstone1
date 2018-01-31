@@ -26,11 +26,10 @@
 </style>
 <table class="table">
     <tr>
-        <th> </th><th class="tg-s6z2">1<br>very easy</th><th class="tg-s6z2">2</th><th class="tg-s6z2">3</th><th class="tg-s6z2">4</th><th class="tg-s6z2">5</th><th class="tg-s6z2">6</th><th class="tg-s6z2">7<br></th><th class="tg-s6z2">8<br></th>
+        <th class="tg-s6z2">1<br>very easy</th><th class="tg-s6z2">2</th><th class="tg-s6z2">3</th><th class="tg-s6z2">4</th><th class="tg-s6z2">5</th><th class="tg-s6z2">6</th><th class="tg-s6z2">7<br></th><th class="tg-s6z2">8<br></th>
 <th class="tg-s6z2">9<br></th> <th class="tg-s6z2">10<br>very difficult</th>   </tr>
     {% for field in form %}
-    <tr>
-        <td>{{ field.label }}  </td>
+        {{ field.label }}
         <td class="tg-s6z2"><input type="radio" name="{{ field.html_name }}" value="1" required></td>
         <td class="tg-s6z2"><input type="radio" name="{{ field.html_name }}" value="2" required></td>
         <td class="tg-s6z2"><input type="radio" name="{{ field.html_name }}" value="3" required></td>
@@ -41,7 +40,7 @@
         <td class="tg-s6z2"><input type="radio" name="{{ field.html_name }}" value="8" required></td>
         <td class="tg-s6z2"><input type="radio" name="{{ field.html_name }}" value="9" required></td>
         <td class="tg-s6z2"><input type="radio" name="{{ field.html_name }}" value="10" required></td>
-    </tr>
+
     {% endfor %}
 </table>
 

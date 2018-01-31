@@ -17,16 +17,13 @@
 
 
     <p><br>
-      In this task, as in Task 1, you will see a 8x8 matrix with a random number of 0 and 1. Your task is to count how many times "1" appears in the matrix.
+      In this task, as in Task 1, you will see a randomly generated 8x8 matrix with 0s and 1s. Your task is to count how many times "1" appears in the matrix.
       Your final score will depend on your performance relative to that of a group of <b>other participants</b> in this experiment under similar circumstances. Each group consists of four people.
       The three other members of your group will be randomly selected.  
       You will never know the names of the other people in your group and they will never know your name or actions.
     </p>
-    <p>
-    You may not use a calculator or your phone to solve these additions, but you are welcome to make use of the provided pen and paper.
-    </p>
      <p>
-           After {{ player.task_timer}} seconds, the task will stop and you will receive a summary of the results.<br>
+           After {{ player.task_timer }} seconds, the task will stop and you will receive a summary of the results.<br>
     </p>
 
     <p>
@@ -46,14 +43,13 @@
     <p>
     Please raise your hand and alert an experimenter if you have any questions.<br>
     </p>
-	
+
+    <p>
+           Otherwise, if you are ready, please click "Next" below to start the time and this {{ player.task_timer}} second task.<br>
+    </p>
 
 </div>
 
-
-    {% if debug %}
-        {% next_button %}<br><br><br>
-    {% endif %}
-
+      {% next_button %}<br><br><br>
 
 {% endblock %}
