@@ -25,7 +25,7 @@ Real Effort Task. Add as many ints as possible.
 class Constants(BaseConstants):
     name_in_url = 'task_sum'
     players_per_group = None
-    task_timer = 300  # see Subsession, before_session_starts setting.
+    task_timer = 120  # see Subsession, before_session_starts setting.
     num_rounds = 70  # must be more than the max one person can do in task_timer seconds
     #
     # INTS_T1 = [
@@ -438,10 +438,10 @@ class Player(BasePlayer):
         doc="""The length of the real effort task timer."""
     )
 
-    solution = models.PositiveIntegerField(
+    solution = models.FloatField(
         doc="this round's correct summation")
 
-    user_total = models.PositiveIntegerField(
+    user_total = models.FloatField(
         min=1,
         max=9999,
         doc="user's summation",

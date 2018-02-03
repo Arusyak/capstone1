@@ -56,8 +56,8 @@ AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
 
 
 # e.g. EUR, CAD, GBP, CHF, CNY, JPY
-REAL_WORLD_CURRENCY_CODE = 'USD'
-USE_POINTS = True
+REAL_WORLD_CURRENCY_CODE = 'AED'
+USE_POINTS = False
 
 
 # e.g. en, de, fr, it, ja, zh-hans
@@ -99,7 +99,7 @@ mturk_hit_settings = {
 
 SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 1.000,
-    'participation_fee': 0.00,
+    'participation_fee': 00.00,
     'doc': "otree real effort task",
     'mturk_hit_settings': mturk_hit_settings,
 }
@@ -113,7 +113,7 @@ SESSION_CONFIGS = [
         'app_sequence': [
             'intro', 'ret1', 'ret2', 'ret3', 'survey'
         ],
-        'ret_timer': 300,
+        'ret_timer': 60,
         'showupfee': 30,
     },
     {
@@ -123,7 +123,7 @@ SESSION_CONFIGS = [
         'app_sequence': [
            'intro', 'ret1',
         ],
-        'task_timer': 300,
+        'task_timer': 120,
         'showupfee':30,
         },
     {
@@ -133,7 +133,7 @@ SESSION_CONFIGS = [
         'app_sequence': [
             'ret2', 'survey'
         ],
-        'ret_timer': 300,
+        'ret_timer': 60,
         'showupfee': 30,
     },
     {
