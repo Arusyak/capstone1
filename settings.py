@@ -39,8 +39,6 @@ DATABASES = {
     )
 }
 
-MIGRATION_MODULES = {'otree': 'otree_core_migrations'}
-
 # AUTH_LEVEL:
 # If you are launching a study and want visitors to only be able to
 # play your app if you provided them with a start link, set the
