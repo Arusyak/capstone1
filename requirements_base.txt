@@ -1,6 +1,1 @@
-<<<<<<< HEAD
 otree>=2.0.19
-=======
-otree-core>=1.3.9
-Django==1.8.8 # for heroku, needs to be explicitly in requirements file
->>>>>>> parent of 9de083d... update
