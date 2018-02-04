@@ -1,5 +1,5 @@
 {% extends "global/Page.html" %}
-{% load staticfiles otree_tags %}
+{% load staticfiles otree %}
 
 {% block title %}
     Task
@@ -62,7 +62,7 @@
     <td class="tg-s6z3" width="40%" style="padding-bottom:10px">
     </td>
    <td class="tg-s6z3" width="20%"></td>
-    <td class="tg-baqh" width="25%"  style="padding-top:12px">{% formfield player.user_total with label="" %}</td>
+    <td class="tg-baqh" width="25%"  style="padding-top:12px">{% formfield player.user_total label="" %}</td>
     <td class="tg-lqy6" width="15%"  style="padding-bottom:10px">{% next_button %}</td>
   </tr>
 

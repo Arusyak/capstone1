@@ -45,7 +45,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    subject_netid = models.CharField(
+    subject_netid = models.StringField(
         doc='netid',
         verbose_name='Please enter your <b>NYU</b> net ID <font color="gray"><br>for example, abc123</font>',
     )

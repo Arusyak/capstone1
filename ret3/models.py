@@ -24,7 +24,7 @@ Real Effort Task. Add as many ints as possible.
 class Constants(BaseConstants):
     name_in_url = 'task_sum3'
     players_per_group = 4
-    task_timer = 60  # see Subsession, before_session_starts setting.
+    task_timer = 60  # see Subsession, creating_session setting.
     num_rounds = 70  # must be more than the max one person can do in task_timer seconds
 
     INTS_T4 = [
@@ -232,7 +232,7 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    def before_session_starts(self):
+    def creating_session(self):
         if 'task_timer' in self.session.config:
             task_timer = self.session.config['task_timer']
         else:
@@ -399,7 +399,7 @@ class Player(BasePlayer):
         doc='''score in this task'''
     )
 
-    task_payment_choose = models.CharField(
+    task_payment_choose = models.StringField(
         initial=None,
         choices=['individual performance', 'compared performance'],
         # if this is chg'd, you must alter code throughout later experiment!!!

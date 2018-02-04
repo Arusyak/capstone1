@@ -24,7 +24,7 @@ Real Effort Task. Add as many ints as possible.
 class Constants(BaseConstants):
     name_in_url = 'task_sum2'
     players_per_group = 4
-    task_timer = 60  # see Subsession, before_session_starts setting.
+    task_timer = 60  # see Subsession, creating_session setting.
     num_rounds = 60  # must be more than the max one person can do in task_timer seconds
 
     INTS_T3 = [
@@ -272,7 +272,7 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    def before_session_starts(self):
+    def creating_session(self):
 
         if 'task_timer' in self.session.config:
             task_timer = self.session.config['task_timer']
