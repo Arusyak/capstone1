@@ -14,7 +14,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 if environ.get('OTREE_PRODUCTION') not in {None, '', '0'}:
     DEBUG = False
 else:
-    DEBUG = True
+    DEBUG = False
 
 ADMIN_USERNAME = 'admin'
 
@@ -23,6 +23,8 @@ ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 
 # don't share this with anybody.
 SECRET_KEY = '17apabcvsj2df0&z=i&*pg%6wv5w36pb9n%%%5_by8ro8$*r9l'
+
+SENTRY_DSN = 'http://75193a0cc46d4243b073fdcfc6d42993:bff465d07bb144f5974bc49d3a3a0b8c@sentry.otree.org/265'
 
 DATABASES = {
     'default': dj_database_url.config(
