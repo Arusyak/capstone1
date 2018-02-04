@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 otree>=2.0.19
-=======
-otree
->>>>>>> parent of 9de083d... update
