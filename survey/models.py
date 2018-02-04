@@ -151,7 +151,7 @@ class Player(BasePlayer):
 
     q_mathplacement = models.CharField(
         initial=None,
-        choices=['Mathematical Functions', 'Introduction to Vector Mathematics', 'Calculus', 'Multivariable Calculus'],
+        choices=['Mathematical Functions', 'Introduction to Vector Mathematics', 'Trigonometry and Differential Functions', 'Calculus', 'Multivariable Calculus'],
         verbose_name='',
         doc='Which course were you placed based on Math Assessment test?',
         widget=widgets.RadioSelect()
