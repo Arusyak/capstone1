@@ -116,10 +116,10 @@ class Player(BasePlayer):
     q_riskaversion = models.CharField(
         initial=None,
         choices=['8 AED for certain',
-                 '12 AED or 6 AED with a 50% chance',
-                 '16 AED or 4 AED with a 50% chance',
-                 '20 AED or 2 AED with a 50% chance',
-                 '24 AED or 0 AED with a 50% chance'],
+                 '12 AED with a 50% chance or 6 AED with a 50% chance',
+                 '16 AED with a 50% chance or 4 AED with a 50% chance',
+                 '20 AED with a 50% chance or 2 AED with a 50% chance',
+                 '24 AED with a 50% chance or 0 AED with a 50% chance'],
         verbose_name='',
         doc='Please pick one of the following.',
         widget=widgets.RadioSelect())
@@ -128,10 +128,10 @@ class Player(BasePlayer):
         x = random.randint(0, 1)
         return {
             '8 AED for certain': [8, 8],
-            '12 AED or 6 AED with a 50% chance': [12, 6],
-            '16 AED or 4 AED with a 50% chance': [16, 4],
-            '20 AED or 2 AED with a 50% chance': [20, 2],
-            '24 AED or 0 AED with a 50% chance': [24, 0]
+            '12 AED with a 50% chance or 6 AED with a 50% chance': [12, 6],
+            '16 AED with a 50% chance or 4 AED with a 50% chance': [16, 4],
+            '20 AED with a 50% chance or 2 AED with a 50% chance': [20, 2],
+            '24 AED with a 50% chance or 0 AED with a 50% chance': [24, 0]
         }[self.q_riskaversion][x]
 
     def vars_for_template(self):
@@ -167,7 +167,7 @@ class Player(BasePlayer):
     )
 
     q_GPA_highschool = models.FloatField(
-        verbose_name="What was your final GPA in high school?",
+        verbose_name='',
         doc="""GPA real""",
     )
 

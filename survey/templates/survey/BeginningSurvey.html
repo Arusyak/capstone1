@@ -1,0 +1,37 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Instructions - Task 3
+{% endblock %}
+
+{% block content %}
+
+{% load otree_tags staticfiles %}
+
+<div class="instructions well well-lg">
+
+    <h2 class="panel-sub-heading">
+
+    </h2>
+
+{#    <link rel="stylesheet" type="text/css"#}
+{#          href="{% static 'global/matrix.css' %}"/>#}
+
+
+    <p><br>
+        The addition tasks have now ended.</p>
+    <p>The final part of the experiment is a survey. Please answer the following questions.</p>
+
+    <p>
+       When you are ready to start, click the next button. <br><br>
+      </p>
+
+
+
+</div>
+
+      {% next_button %}<br><br><br>
+
+
+{% endblock %}
