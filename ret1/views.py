@@ -11,6 +11,8 @@ class BeginningWaitPage(WaitPage):
     def is_displayed(self):
         return self.round_number == 1
 
+    wait_for_all_groups = True
+
     def after_all_players_arrive(self):
         pass
 
