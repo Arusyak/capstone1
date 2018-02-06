@@ -1,4 +1,5 @@
 import os
+from _socket import gethostname
 from os import environ
 
 import dj_database_url
@@ -25,20 +26,29 @@ ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 SECRET_KEY = '17apabcvsj2df0&z=i&*pg%6wv5w36pb9n%%%5_by8ro8$*r9l'
 
 SENTRY_DSN = 'http://75193a0cc46d4243b073fdcfc6d42993:bff465d07bb144f5974bc49d3a3a0b8c@sentry.otree.org/265'
+#
+# if gethostname().lower() == 'remote':
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#             'NAME': 'laine',
+#             'USER': 'laine',
+#             'PASSWORD': '1',
+#             'HOST': 'localhost',
+#             'PORT': ''}}
+# else:
+#     DATABASES = {
+#         'default': dj_database_url.config(
+#             default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'))}
 
 DATABASES = {
-    'default': dj_database_url.config(
-        # Rather than hardcoding the DB parameters here,
-        # it's recommended to set the DATABASE_URL environment variable.
-        # This will allow you to use SQLite locally, and postgres/mysql
-        # on the server
-        # Examples:
-        # export DATABASE_URL=postgres://USER:PASSWORD@HOST:PORT/NAME
-        # export DATABASE_URL=mysql://USER:PASSWORD@HOST:PORT/NAME
-
-        # fall back to SQLite if the DATABASE_URL env var is missing
-        default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'laine',
+        'USER': 'laine',
+        'PASSWORD': '1',
+        'HOST': '',
+        'PORT': '5432'}
 }
 
 # AUTH_LEVEL:
@@ -115,7 +125,7 @@ SESSION_CONFIGS = [
         'app_sequence': [
             'intro', 'ret1', 'ret2', 'ret3', 'survey'
         ],
-        'ret_timer': 60,
+        'ret_timer': 300,
         'showupfee': 30,
     },
     {
