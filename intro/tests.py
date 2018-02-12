@@ -5,7 +5,7 @@ import random
 
 from otree.common import Currency as c, currency_range
 
-from . import views
+from . import pages
 from ._builtin import Bot
 from .models import Constants
 
@@ -13,5 +13,5 @@ from .models import Constants
 class PlayerBot(Bot):
 
     def play_round(self):
-        yield (views.Task)
-        yield (views.Results)
+        yield (pages.Task)
+        yield (pages.Results)
