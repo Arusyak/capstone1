@@ -19,7 +19,7 @@ class Constants(BaseConstants):
 
 class Subsession(BaseSubsession):
 
-    def before_session_starts(self):
+    def creating_session(self):
         for p in self.get_players():
             p.payoff = 0
             if 'showupfee' in self.session.config:
@@ -43,21 +43,21 @@ class Player(BasePlayer):
 
     task_2_score = models.PositiveIntegerField(
         doc='subject score on task 2, num task correct')
-    op_scores = models.CharField(
+    op_scores = models.StringField(
         doc='this subjects opposing player scores from task 2. also used in task 3')
     op_top_score = models.PositiveIntegerField(
         doc='the top score this player faced')
     task_2_final_score = models.PositiveIntegerField(
         doc='subject final score, after comparision')
 
-    payment_method_selection = models.CharField(
+    payment_method_selection = models.StringField(
         doc='subjects payment method selection, individual or comparision')
     task_3_score = models.PositiveIntegerField(
         doc='subject score on task 3, num tasks correct')
     task_3_final_score = models.PositiveIntegerField(
         doc='subjects final score on task 3. if subject chose comparison, score after . otherwise individual score')
 
-    task_4_payment = models.CharField(
+    task_4_payment = models.StringField(
         doc='the task randomly selected for payment. task 1, 2 or 3')
     final_task_earnings = models.FloatField(
         doc='earnings from the task randomly selected, before showup fee and risk aversion score')

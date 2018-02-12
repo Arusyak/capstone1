@@ -49,7 +49,7 @@ class Constants(BaseConstants):
 
 class Subsession(BaseSubsession):
 
-    def before_session_starts(self):
+    def creating_session(self):
         for p in self.get_players():
             p.payoff = 0
             if 'showupfee' in self.session.config:
@@ -99,7 +99,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    q_rank = models.CharField(
+    q_rank = models.StringField(
         initial=None,
         choices=[
             ['1', "1 (you solved the most questions right)"],
@@ -113,7 +113,7 @@ class Player(BasePlayer):
             'the least correct answers in your group).',
         widget=widgets.RadioSelect())
 
-    q_riskaversion = models.CharField(
+    q_riskaversion = models.StringField(
         initial=None,
         choices=['8 AED for certain',
                  '12 AED with a 50% chance or 6 AED with a 50% chance',
@@ -137,7 +137,7 @@ class Player(BasePlayer):
     def vars_for_template(self):
         self.participant.vars['risk_aversion_score'] = self.risk_aversion_score()
 
-    q_riskpreference = models.CharField(
+    q_riskpreference = models.StringField(
         initial=None,
         choices=['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
         verbose_name='',
@@ -149,7 +149,7 @@ class Player(BasePlayer):
     #         "risk_aversion_score": self.risk_aversion_score()
     #     }
 
-    q_mathplacement = models.CharField(
+    q_mathplacement = models.StringField(
         initial=None,
         choices=['Mathematical Functions', 'Introduction to Vector Mathematics', 'Trigonometry and Differential Equations','Calculus', 'Multivariable Calculus'],
         verbose_name='',
@@ -157,7 +157,7 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect()
     )
 
-    q_mathlevel = models.CharField(
+    q_mathlevel = models.StringField(
         initial=None,
         choices=[
             'Pre-Calculus', 'Calculus', 'Mutivariable calculus', 'Beyond multivariable calculus'],
@@ -176,7 +176,7 @@ class Player(BasePlayer):
         doc="""GPA max"""
     )
 
-    q_majordeclarationYN = models.CharField(
+    q_majordeclarationYN = models.StringField(
         initial=None,
         choices=[
             'Yes',
@@ -268,7 +268,7 @@ class Player(BasePlayer):
         widget=django_widgets.CheckboxInput()
     )
 
-    q_gpastudytrack = models.CharField(
+    q_gpastudytrack = models.StringField(
         initial=None,
         choices=[
             'Arts and Humanities',
@@ -282,7 +282,7 @@ class Player(BasePlayer):
         widget=django_widgets.SelectMultiple()
     )
 
-    q_profitablestudytrack = models.CharField(
+    q_profitablestudytrack = models.StringField(
         initial=None,
         choices=[
             'Arts and Humanities',
@@ -296,7 +296,7 @@ class Player(BasePlayer):
         widget=django_widgets.SelectMultiple()
     )
 
-    q_mathlevelnyuad = models.CharField(
+    q_mathlevelnyuad = models.StringField(
         initial=None,
         choices=[
             '...in the top 25%?',
@@ -308,14 +308,14 @@ class Player(BasePlayer):
         doc='Compared to other NYUAD students, do you think your mathematics ability is...',
         widget=widgets.RadioSelect())
 
-    q_passinggrade = models.CharField(
+    q_passinggrade = models.StringField(
         initial=None,
         choices=['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
         verbose_name='',
         doc='How difficult is it for you to get a passing grade in mathematics?',
         widget=widgets.RadioSelect())
 
-    q_wealth = models.CharField(
+    q_wealth = models.StringField(
         initial=None,
         choices=[
             '1', '2', '3', '4', '5', '6'],
@@ -332,21 +332,21 @@ class Player(BasePlayer):
 
     task_2_score = models.PositiveIntegerField(
         doc='subject score on task 2, num task correct')
-    op_scores = models.CharField(
+    op_scores = models.StringField(
         doc='this subjects opposing player scores from task 2. also used in task 3')
     op_top_score = models.PositiveIntegerField(
         doc='the top score this player faced')
     task_2_final_score = models.PositiveIntegerField(
         doc='subject final score, after comparision')
 
-    payment_method_selection = models.CharField(
+    payment_method_selection = models.StringField(
         doc='subjects payment method selection, individual or comparision')
     task_3_score = models.PositiveIntegerField(
         doc='subject score on task 3, num tasks correct')
     task_3_final_score = models.PositiveIntegerField(
         doc='subjects final score on task 3. if subject chose comparison, score after . otherwise individual score')
 
-    task_4_payment = models.CharField(
+    task_4_payment = models.StringField(
         doc='the task randomly selected for payment. task 1, 2 or 3')
     final_task_earnings = models.FloatField(
         doc='earnings from the task randomly selected, before showup fee and risk aversion score')
