@@ -115,7 +115,7 @@ SESSION_CONFIGS = [
         'app_sequence': [
             'intro', 'ret1', 'ret2', 'ret3', 'survey'
         ],
-        'ret_timer': 60,
+        'ret_timer': 300,
         'showupfee': 30,
     },
     {
