@@ -89,13 +89,13 @@ class Group(BaseGroup):
 
             if task_choice <= 1 / 3:
                 PLAYER.participant.vars['task_4_payment'] = "Task 1"
-                PLAYER.participant.vars['final_task_earnings'] = task_1_score * 5
+                PLAYER.participant.vars['final_task_earnings'] = task_1_score * 4
             elif 2 / 3 >= task_choice > 1/3:
                 PLAYER.participant.vars['task_4_payment'] = "Task 2"
-                PLAYER.participant.vars['final_task_earnings'] = task_2_final_score * 5
+                PLAYER.participant.vars['final_task_earnings'] = task_2_final_score * 4
             else:
                 PLAYER.participant.vars['task_4_payment'] = "Task 3"
-                PLAYER.participant.vars['final_task_earnings'] = task_3_final_score * 5
+                PLAYER.participant.vars['final_task_earnings'] = task_3_final_score * 4
 
 
 class Player(BasePlayer):
